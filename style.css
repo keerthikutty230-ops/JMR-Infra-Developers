@@ -1629,3 +1629,111 @@ footer h4 {
     height: auto !important;
   }
 }
+/* =============================================================
+   MOBILE-ONLY VIEW: 5 CARDS RE-ORDER & BACKGROUND ANTI-WOBBLE
+   (Applies only to screens 576px and below)
+   ============================================================= */
+@media screen and (max-width: 576px) {
+  
+  /* 1. Global Page Lock - Stops your whole website background from moving horizontally */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+
+  /* 2. Freeze the container layout to isolate all 5 cards */
+  .services-section,
+  .services-stack-container,
+  section,
+  footer {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important; 
+    box-sizing: border-box !important;
+  }
+
+  /* 3. Stack all 5 cards strictly downward */
+  .services-stack-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    padding: 10px !important;
+  }
+
+  /* 4. Reset cards to full width and release desktop heights */
+  .service-stacked-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    height: auto !important;
+    min-height: unset !important;
+    box-sizing: border-box !important;
+  }
+
+/* 5. Re-declare Background Colors explicitly for the actual card boxes on mobile */
+.service-stacked-card.communication-bg { background-color: #fcefe9 !important; } /* Card 1 */
+.service-stacked-card.involvement-bg  { background-color: #eaf5eb !important; } /* Card 2 */
+.service-stacked-card.academic-bg     { background-color: #f1f0f8 !important; } /* Card 3 */
+.service-stacked-card.choice-bg       { background-color: #677E61 !important; } /* Card 4 Background */
+.service-stacked-card.trust-bg        { background-color: #78A4CB !important; } /* Card 5 Background */
+
+/* 6. Activate inner layout controls to execute visual card shifting */
+.card-inner-layout {
+  display: flex !important;
+  flex-direction: column !important; /* Changes left-to-right setup into a top-to-bottom list */
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: transparent !important; /* Kept transparent so the card background shines through */
+}
+
+/* [STEP A]: FORCE IMAGES TO THE VERY TOP (Order 1) */
+.stacked-card-image {
+  order: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+.stacked-card-image img {
+  width: 100% !important;
+  height: 220px !important; 
+  object-fit: cover !important; 
+  display: block !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+/* [STEP B]: FORCE MATTER/TEXT INTO THE MIDDLE SPACE (Order 2) */
+.stacked-card-content {
+  order: 2 !important;
+  width: 100% !important;
+  padding: 20px 15px 10px 15px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  transform: none !important;
+  top: auto !important;
+}
+
+.stacked-card-content h3,
+.stacked-card-content p {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+/* [STEP C]: FORCE THE REDIRECT BUTTON DOWN TO THE BASE (Order 3) */
+.btn-card.card-redirect {
+  order: 3 !important;
+  display: block !important;
+  width: calc(100% - 30px) !important; 
+  margin: 15px auto !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+}
