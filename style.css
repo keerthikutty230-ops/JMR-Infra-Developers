@@ -1476,12 +1476,12 @@ footer h4 {
     object-fit: cover;
 }
 /* =============================================================
-   FINAL MASTER MOBILE RESIZE FIX: ALL SECTIONS LOCKED STATIC
-   (Applies strictly to screens 576px and below)
+   FINAL BULLETPROOF TWO-VIEW MOBILE RE-ORDER & NO-GAP SYSTEM
+   (Applies strictly to mobile screens 576px and below)
    ============================================================= */
 @media screen and (max-width: 576px) {
   
-  /* 1. Global Page Lock - Stops your whole website background from moving horizontally */
+  /* 1. Global Page Lock - Stops website background from moving */
   html, body {
     width: 100% !important;
     max-width: 100% !important;
@@ -1499,7 +1499,88 @@ footer h4 {
   }
 
   /* ======================================================
-     FIX 1: SERVICES SECTION (Image ➔ Text ➔ Button)
+     FIX 1: FEATURED PROPERTIES SECTION (2-Column Grid / NO GAP)
+     ====================================================== */
+  .featured-properties-container, 
+  .cards-grid,
+  .featured-properties .row,
+  .featured-properties [class*="container"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 side-by-side cards */
+    grid-auto-rows: min-content !important; 
+    align-items: start !important;          
+    gap: 10px !important; 
+    padding: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .property-card, 
+  .featured-properties .card,
+  .featured-properties [class*="card"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;        
+    height: auto !important;          
+    min-height: unset !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column !important;   /* Stack top-to-bottom */
+    justify-content: flex-start !important; /* Forces text up against the image */
+    background: #ffffff !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+  }
+
+  /* CRITICAL: Target any invisible spacing divs forcing the text down */
+  .property-card > div,
+  .featured-properties .card > div {
+    height: auto !important;
+    min-height: unset !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-grow: 0 !important; /* Prevents stretching spaces */
+  }
+
+  /* Keep the property image at a fixed dimension */
+  .property-card img, 
+  .featured-properties .card img,
+  .property-card [class*="img"] {
+    width: 100% !important;
+    height: 120px !important; 
+    min-height: 120px !important;
+    max-height: 120px !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  /* Target the text zone box and pull it right below the photo */
+  .property-card .card-body,
+  .featured-properties .card-body,
+  .property-card [class*="body"],
+  .property-card [class*="content"] {
+    padding: 8px !important;    
+    margin: 0 !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    flex-grow: 0 !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  /* Compress individual spacing on location matter headings */
+  .property-card h2, .property-card h3, .property-card h4, .property-card p {
+    margin: 2px 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  /* ======================================================
+     FIX 2: SERVICES SECTION (Strict Image -> Text -> Button)
      ====================================================== */
   .services-stack-container {
     display: flex !important;
@@ -1514,10 +1595,9 @@ footer h4 {
     margin: 0 0 16px 0 !important;
     height: auto !important;
     min-height: unset !important;
-    display: block !important; /* Disables the desktop horizontal splits completely */
+    display: block !important; 
   }
 
-  /* Forces the actual container holding the elements vertical */
   .service-stacked-card .card-inner-layout,
   .service-stacked-card > div {
     display: flex !important;
@@ -1525,7 +1605,6 @@ footer h4 {
     width: 100% !important;
   }
 
-  /* [SERVICES] STEP A: FORCE IMAGE TO THE VERY TOP */
   .service-stacked-card .stacked-card-image,
   .service-stacked-card img {
     order: 1 !important;
@@ -1533,12 +1612,12 @@ footer h4 {
     height: 220px !important;
     display: block !important;
   }
+  
   .service-stacked-card img {
     object-fit: cover !important;
     border-radius: 8px 8px 0 0 !important;
   }
 
-  /* [SERVICES] STEP B: FORCE TEXT MATTER TO THE MIDDLE SPACE */
   .service-stacked-card .stacked-card-content,
   .service-stacked-card h3,
   .service-stacked-card p {
@@ -1546,11 +1625,11 @@ footer h4 {
     width: 100% !important;
     box-sizing: border-box !important;
   }
+  
   .service-stacked-card .stacked-card-content {
     padding: 15px !important;
   }
 
-  /* [SERVICES] STEP C: FORCE THE REDIRECT BUTTON TO THE BOTTOM */
   .service-stacked-card .btn-card,
   .service-stacked-card .card-redirect,
   .service-stacked-card a {
@@ -1561,7 +1640,7 @@ footer h4 {
     text-align: center !important;
   }
 
-  /* Re-declare Background Colors explicitly for the actual card boxes on mobile */
+  /* Maintain Card Background Colors */
   .service-stacked-card.communication-bg { background-color: #fcefe9 !important; } 
   .service-stacked-card.involvement-bg  { background-color: #677E61 !important; } 
   .service-stacked-card.academic-bg     { background-color: #f1f0f8 !important; } 
@@ -1570,7 +1649,7 @@ footer h4 {
 
 
   /* ======================================================
-     FIX 2: ABOUT US SECTION (Image ➔ Text ➔ Button)
+     FIX 3: ABOUT US SECTION (Strict Image -> Text -> Button)
      ====================================================== */
   .about-us-section, 
   .about-us-container,
@@ -1581,95 +1660,41 @@ footer h4 {
     padding: 10px !important;
   }
 
-  .about-card,
-  .legacy-card {
+  .about-card, .legacy-card {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 0 16px 0 !important;
     display: flex !important;
-    flex-direction: column !important; /* Activates vertical column sorting logic */
+    flex-direction: column !important; 
     background: #ffffff !important;
     border-radius: 8px !important;
     overflow: hidden !important;
     height: auto !important;
   }
 
-  /* [ABOUT US] STEP A: FORCE IMAGE TO THE TOP */
-  .about-card-img-wrapper,
-  .about-card img,
-  .about-card .image-container {
+  .about-card-img-wrapper, .about-card img {
     order: 1 !important;
     width: 100% !important;
     height: 200px !important;
     display: block !important;
   }
+  
   .about-card img {
     object-fit: cover !important;
   }
 
-  /* [ABOUT US] STEP B: FORCE TEXT MATTER TO THE MIDDLE */
-  .about-card-content,
-  .about-card h3,
-  .about-card p,
-  .about-card .text-content {
+  .about-card-content, .about-card h3, .about-card p {
     order: 2 !important;
     width: 100% !important;
     padding: 15px !important;
     box-sizing: border-box !important;
   }
 
-  /* [ABOUT US] STEP C: FORCE THE BUTTON TO THE BOTTOM */
-  .about-card-btn,
-  .about-card a,
-  .about-card button {
+  .about-card-btn, .about-card a {
     order: 3 !important;
     display: block !important;
     width: calc(100% - 30px) !important;
     margin: 5px auto 15px auto !important;
     text-align: center !important;
-  }
-
-
-  /* ======================================================
-     FIX 3: FEATURED PROPERTIES GRID SECTION (2-Column Frame)
-     ====================================================== */
-  .featured-properties-container, 
-  .cards-grid,
-  .featured-properties .row {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; 
-    grid-auto-rows: min-content !important; 
-    align-items: start !important;          
-    gap: 10px !important; 
-    padding: 10px !important;
-    width: 100% !important;
-  }
-
-  .property-card, 
-  .featured-properties .card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;        
-    height: auto !important;          
-    min-height: 0 !important;
-    display: block !important;   
-    background: #ffffff !important;
-    overflow: hidden !important;
-    border-radius: 6px !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
-  }
-
-  .property-card img, 
-  .featured-properties .card img {
-    width: 100% !important;
-    height: 120px !important; 
-    object-fit: cover !important;
-    display: block !important;
-  }
-
-  .property-card .card-body {
-    padding: 6px 8px !important;    
-    margin: 0 !important; 
-    display: block !important;
   }
 }
