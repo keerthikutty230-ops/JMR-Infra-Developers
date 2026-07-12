@@ -1476,12 +1476,11 @@ footer h4 {
     object-fit: cover;
 }
 /* =============================================================
-   FINAL BULLETPROOF TWO-VIEW MOBILE RE-ORDER & NO-GAP SYSTEM
-   (Applies strictly to mobile screens 576px and below)
+   MOBILE ARCHITECTURE (Applies strictly to screens 576px and below)
    ============================================================= */
 @media screen and (max-width: 576px) {
   
-  /* 1. Global Page Lock - Stops website background from moving */
+  /* 1. Global Viewport Lock - Keeps website background flat and static */
   html, body {
     width: 100% !important;
     max-width: 100% !important;
@@ -1491,62 +1490,52 @@ footer h4 {
     position: relative !important;
   }
 
-  section, footer, .container, .row, .grid {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important; 
-    box-sizing: border-box !important;
-  }
-
   /* ======================================================
-     FIX 1: FEATURED PROPERTIES SECTION (2-Column Grid / NO GAP)
+     SEPARATE SPECIFIC FIX: FEATURED PROPERTIES CARDS ONLY
      ====================================================== */
+  
+  /* Target the outer properties section grid wrapper */
   .featured-properties-container, 
   .cards-grid,
-  .featured-properties .row,
-  .featured-properties [class*="container"] {
+  .featured-properties .row {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* 2 side-by-side cards */
+    grid-template-columns: repeat(2, 1fr) !important; /* Forces 2 cards per row side-by-side */
     grid-auto-rows: min-content !important; 
     align-items: start !important;          
-    gap: 10px !important; 
+    gap: 12px !important; 
     padding: 10px !important;
     width: 100% !important;
     height: auto !important;
   }
 
+  /* Force the properties cards to completely drop their desktop height stretch */
   .property-card, 
-  .featured-properties .card,
-  .featured-properties [class*="card"] {
+  .featured-properties .card {
+    display: flex !important;
+    flex-direction: column !important;     /* Re-enable flex layout */
+    justify-content: flex-start !important; /* Force all internal text elements upwards */
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 !important;        
-    height: auto !important;          
-    min-height: unset !important;
+    height: auto !important;                /* DESTROYS THE RIGID VERTICAL GAP STRETCH */
+    min-height: unset !important;           
     max-height: none !important;
-    display: flex !important;
-    flex-direction: column !important;   /* Stack top-to-bottom */
-    justify-content: flex-start !important; /* Forces text up against the image */
+    margin: 0 !important;
     background: #ffffff !important;
-    overflow: hidden !important;
     border-radius: 6px !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+    overflow: hidden !important;
   }
 
-  /* CRITICAL: Target any invisible spacing divs forcing the text down */
+  /* Reset layout parameters for the inner wrapper element inside your card */
   .property-card > div,
   .featured-properties .card > div {
     height: auto !important;
     min-height: unset !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex-grow: 0 !important; /* Prevents stretching spaces */
+    flex-grow: 0 !important; /* Completely blocks the text box layer from pulling downwards */
   }
 
-  /* Keep the property image at a fixed dimension */
+  /* Force the property images to stay locked at a fixed small frame */
   .property-card img, 
-  .featured-properties .card img,
-  .property-card [class*="img"] {
+  .featured-properties .card img {
     width: 100% !important;
     height: 120px !important; 
     min-height: 120px !important;
@@ -1554,147 +1543,109 @@ footer h4 {
     object-fit: cover !important;
     display: block !important;
     margin: 0 !important;
+    flex-grow: 0 !important;
   }
 
-  /* Target the text zone box and pull it right below the photo */
+  /* Lock the text details frame tightly against the bottom edge of the image */
   .property-card .card-body,
-  .featured-properties .card-body,
-  .property-card [class*="body"],
-  .property-card [class*="content"] {
-    padding: 8px !important;    
-    margin: 0 !important; 
+  .featured-properties .card-body {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    flex-grow: 0 !important;
+    flex-grow: 0 !important; /* Completely stops vertical structural expanding */
+    padding: 8px !important;    
+    margin: 0 !important; 
     height: auto !important;
     min-height: unset !important;
   }
 
-  /* Compress individual spacing on location matter headings */
-  .property-card h2, .property-card h3, .property-card h4, .property-card p {
+  /* Trim extra padding gaps under location titles & prices lines */
+  .property-card h2, 
+  .property-card h3, 
+  .property-card h4, 
+  .property-card p, 
+  .property-card span {
     margin: 2px 0 !important;
     padding: 0 !important;
     height: auto !important;
     min-height: unset !important;
   }
+}
+/* =============================================================
+   SEPARATE COMPACT FIX FOR FEATURED PROPERTIES CARDS ONLY
+   ============================================================= */
+@media screen and (max-width: 576px) {
 
-  /* ======================================================
-     FIX 2: SERVICES SECTION (Strict Image -> Text -> Button)
-     ====================================================== */
-  .services-stack-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
+  /* 1. Reset the grid rows so they do not stretch elements vertically */
+  .featured-properties-container, 
+  .cards-grid,
+  .featured-properties .row {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; 
+    grid-auto-rows: min-content !important; 
+    align-items: start !important;          
+    gap: 12px !important; 
     padding: 10px !important;
   }
 
-  .service-stacked-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 0 16px 0 !important;
+  /* 2. Strip ALL flex-stretch logic from the property cards */
+  .property-card, 
+  .featured-properties .card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Forces content up right against the image */
+    height: auto !important;                /* Destroys the rigid empty space stretch */
+    min-height: unset !important;           
+    max-height: none !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+  }
+
+  /* 3. Completely stop internal wrapper blocks from taking up elastic space */
+  .property-card > div,
+  .featured-properties .card > div {
     height: auto !important;
     min-height: unset !important;
-    display: block !important; 
+    flex-grow: 0 !important; /* Destroys invisible stretching gaps */
   }
 
-  .service-stacked-card .card-inner-layout,
-  .service-stacked-card > div {
-    display: flex !important;
-    flex-direction: column !important; 
+  /* 4. Keep the property images tight at a clear aspect frame */
+  .property-card img, 
+  .featured-properties .card img {
     width: 100% !important;
-  }
-
-  .service-stacked-card .stacked-card-image,
-  .service-stacked-card img {
-    order: 1 !important;
-    width: 100% !important;
-    height: 220px !important;
-    display: block !important;
-  }
-  
-  .service-stacked-card img {
+    height: 120px !important; 
+    min-height: 120px !important;
+    max-height: 120px !important;
     object-fit: cover !important;
-    border-radius: 8px 8px 0 0 !important;
-  }
-
-  .service-stacked-card .stacked-card-content,
-  .service-stacked-card h3,
-  .service-stacked-card p {
-    order: 2 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  .service-stacked-card .stacked-card-content {
-    padding: 15px !important;
-  }
-
-  .service-stacked-card .btn-card,
-  .service-stacked-card .card-redirect,
-  .service-stacked-card a {
-    order: 3 !important;
     display: block !important;
-    width: calc(100% - 30px) !important;
-    margin: 10px auto 15px auto !important;
-    text-align: center !important;
+    margin: 0 !important;
+    flex-grow: 0 !important;
   }
 
-  /* Maintain Card Background Colors */
-  .service-stacked-card.communication-bg { background-color: #fcefe9 !important; } 
-  .service-stacked-card.involvement-bg  { background-color: #677E61 !important; } 
-  .service-stacked-card.academic-bg     { background-color: #f1f0f8 !important; } 
-  .service-stacked-card.choice-bg       { background-color: #677E61 !important; } 
-  .service-stacked-card.trust-bg        { background-color: #78A4CB !important; }
-
-
-  /* ======================================================
-     FIX 3: ABOUT US SECTION (Strict Image -> Text -> Button)
-     ====================================================== */
-  .about-us-section, 
-  .about-us-container,
-  .about-cards-grid {
+  /* 5. Force the text box card body right flush against the image bottom edge */
+  .property-card .card-body,
+  .featured-properties .card-body {
     display: flex !important;
     flex-direction: column !important;
-    gap: 20px !important;
-    padding: 10px !important;
-  }
-
-  .about-card, .legacy-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 0 16px 0 !important;
-    display: flex !important;
-    flex-direction: column !important; 
-    background: #ffffff !important;
-    border-radius: 8px !important;
-    overflow: hidden !important;
+    justify-content: flex-start !important;
+    flex-grow: 0 !important;
+    padding: 8px !important;    
+    margin: 0 !important; 
     height: auto !important;
+    min-height: unset !important;
   }
 
-  .about-card-img-wrapper, .about-card img {
-    order: 1 !important;
-    width: 100% !important;
-    height: 200px !important;
-    display: block !important;
-  }
-  
-  .about-card img {
-    object-fit: cover !important;
-  }
-
-  .about-card-content, .about-card h3, .about-card p {
-    order: 2 !important;
-    width: 100% !important;
-    padding: 15px !important;
-    box-sizing: border-box !important;
-  }
-
-  .about-card-btn, .about-card a {
-    order: 3 !important;
-    display: block !important;
-    width: calc(100% - 30px) !important;
-    margin: 5px auto 15px auto !important;
-    text-align: center !important;
+  /* 6. Clean and tight structural margins on textual content strings */
+  .property-card h2, 
+  .property-card h3, 
+  .property-card h4, 
+  .property-card p, 
+  .property-card span {
+    margin: 2px 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: unset !important;
   }
 }
