@@ -1578,168 +1578,72 @@ footer h4 {
    MOBILE-ONLY VIEW: 5 CARDS RE-ORDER & BACKGROUND ANTI-WOBBLE
    (Applies only to screens 576px and below)
    ============================================================= */
-@media screen and (max-width: 576px) {
-  
-  /* 1. Global Page Lock - Stops your whole website background from moving horizontally */
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-  }
-
-  /* 2. Freeze the container layout to isolate all 5 cards */
-  .services-section,
-  .services-stack-container,
-  section,
-  footer {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important; 
-    box-sizing: border-box !important;
-  }
-
-  /* 3. Stack all 5 cards strictly downward */
-  .services-stack-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-    padding: 10px !important;
-  }
-
-  /* 4. Reset cards to full width and release desktop heights */
-  .service-stacked-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    height: auto !important;
-    min-height: unset !important;
-    box-sizing: border-box !important;
-  }
-
-/* 5. Re-declare Background Colors explicitly for the actual card boxes on mobile */
-.service-stacked-card.communication-bg { background-color: #fcefe9 !important; } /* Card 1 */
-.service-stacked-card.involvement-bg  { background-color: #eaf5eb !important; } /* Card 2 */
-.service-stacked-card.academic-bg     { background-color: #f1f0f8 !important; } /* Card 3 */
-.service-stacked-card.choice-bg       { background-color: #677E61 !important; } /* Card 4 Background */
-.service-stacked-card.trust-bg        { background-color: #78A4CB !important; } /* Card 5 Background */
-
-/* 6. Activate inner layout controls to execute visual card shifting */
-.card-inner-layout {
-  display: flex !important;
-  flex-direction: column !important; /* Changes left-to-right setup into a top-to-bottom list */
-  width: 100% !important;
-  box-sizing: border-box !important;
-  background: transparent !important; /* Kept transparent so the card background shines through */
-}
-
-/* [STEP A]: FORCE IMAGES TO THE VERY TOP (Order 1) */
-.stacked-card-image {
-  order: 1 !important;
-  width: 100% !important;
-  height: auto !important;
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-}
-
-.stacked-card-image img {
-  width: 100% !important;
-  height: 220px !important; 
-  object-fit: cover !important; 
-  display: block !important;
-  border-radius: 8px 8px 0 0 !important;
-}
-
-/* [STEP B]: FORCE MATTER/TEXT INTO THE MIDDLE SPACE (Order 2) */
-.stacked-card-content {
-  order: 2 !important;
-  width: 100% !important;
-  padding: 20px 15px 10px 15px !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  transform: none !important;
-  top: auto !important;
-}
-
-.stacked-card-content h3,
-.stacked-card-content p {
-  text-align: left !important;
-  width: 100% !important;
-}
-
-/* [STEP C]: FORCE THE REDIRECT BUTTON DOWN TO THE BASE (Order 3) */
-.btn-card.card-redirect {
-  order: 3 !important;
-  display: block !important;
-  width: calc(100% - 30px) !important; 
-  margin: 15px auto !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-}
-}
 /* ==========================================
    FEATURED PROPERTIES - MOBILE 2-COLUMN VIEW
    ========================================== */
 @media screen and (max-width: 576px) {
   
-  /* 1. Reset the container holding your property cards into a 2-column grid */
+  /* 1. Forces 2 cards per row side-by-side cleanly */
   .featured-properties-container, 
   .cards-grid,
   .featured-properties .row {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Forces 2 cards per row side-by-side */
-    gap: 12px !important;                             /* Clean, tight spacing between grid cards */
+    grid-template-columns: repeat(2, 1fr) !important; 
+    gap: 12px !important;                             
     padding: 10px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
-  /* 2. Format individual property cards to stay perfectly inside their frame half */
+  /* 2. Format individual property cards to close up structural gaps */
   .property-card, 
   .featured-properties .card {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    height: auto !important;
+    height: auto !important;          /* Breaks out of any massive desktop heights */
+    min-height: unset !important;      /* Clears out height presets forcing the gap */
     display: flex !important;
     flex-direction: column !important;
+    justify-content: flex-start !important; /* Forces components to align tightly top-to-bottom */
     background: #ffffff !important;
     border-radius: 6px !important;
     overflow: hidden !important;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
   }
 
-  /* 3. Scale down the images so they don't look oversized */
+  /* 3. Scale down the images cleanly inside their frames */
   .property-card img, 
   .featured-properties .card img {
     width: 100% !important;
-    height: 120px !important;     /* Trimmed height to ensure image & text fit one frame */
+    height: 120px !important;     
     object-fit: cover !important;
     display: block !important;
+    margin-bottom: 0 !important;   /* Eliminates any separation margins */
   }
 
-  /* 4. Adjust headings, text, and buttons inside small grids so they stay compact */
+  /* 4. Make text matter sit tight right underneath the picture */
   .property-card h2,
   .property-card h3 {
-    font-size: 14px !important;
-    margin: 6px 0 !important;
+    font-size: 13px !important;
+    margin: 6px 0 2px 0 !important; /* Minimal margins around headers */
     padding: 0 8px !important;
   }
 
   .property-card p,
-  .property-card span {
+  .property-card span,
+  .property-card div {
     font-size: 11px !important;
+    margin: 2px 0 !important;       /* Tight tracking for inner matter lines */
     padding: 0 8px !important;
+    height: auto !important;        /* Prevents element boxes from self-stretching */
+    min-height: unset !important;
   }
 
-  /* Compact button styling to fit the card bottom tightly */
+  /* Compact button styling pinned cleanly to the card base */
   .property-card button,
-  .property-card .btn {
+  .property-card .btn,
+  .property-card a {
     width: calc(100% - 16px) !important;
     margin: 8px auto !important;
     padding: 6px !important;
