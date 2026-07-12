@@ -1530,7 +1530,7 @@ footer h4 {
   #featured-grid,
   section div[id*="grid"] {
     display: grid !important;
-    grid-template-columns: repeat(4, 3fr) !important; /* Perfect 50% screen split */
+    grid-template-columns: repeat(2, 3fr) !important; /* Perfect 50% screen split */
     align-items: stretch !important;                 /* Forces cards in the same row to match height */
     gap: 8px !important;                             /* Tight spacing maximizes horizontal card width */
     padding: 8px !important;
