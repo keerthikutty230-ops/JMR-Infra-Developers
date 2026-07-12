@@ -1530,7 +1530,7 @@ footer h4 {
   #featured-grid,
   section div[id*="grid"] {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Perfect 50% screen split */
+    grid-template-columns: repeat(2, 2fr) !important; /* Perfect 50% screen split */
     align-items: stretch !important;                 /* Forces cards in the same row to match height */
     gap: 8px !important;                             /* Tight spacing maximizes horizontal card width */
     padding: 8px !important;
@@ -1567,7 +1567,7 @@ footer h4 {
     height: auto !important;
     min-height: unset !important;
     max-height: none !important;
-    flex-grow: 0 !important;                        /* Erases invisible stretching spaces */
+    flex-grow: 1 !important;                        /* Erases invisible stretching spaces */
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1578,9 +1578,9 @@ footer h4 {
   .property-card [class*="img"],
   #featured-grid [class*="img"] {
     width: 100% !important;
-    height: 135px !important;                       /* Standardizes building preview sizes */
-    min-height: 135px !important;
-    max-height: 135px !important;
+    height: 115px !important;                       /* Standardizes building preview sizes */
+    min-height: 115px !important;
+    max-height: 115px !important;
     object-fit: cover !important;
     display: block !important;
     margin: 0 !important;
@@ -1598,7 +1598,7 @@ footer h4 {
     justify-content: flex-start !important;
     flex-grow: 1 !important;                         /* Automatically pushes prices/buttons evenly to bottom */
     
-    padding: 8px !important;                        
+    /* padding: 8px !important;                         */
     margin: 0 !important; 
     height: auto !important;
     min-height: unset !important;
@@ -1609,12 +1609,12 @@ footer h4 {
   /* 7. Drop typography metrics inside JavaScript strings down to compact proportions */
   .property-card h2, .property-card h3, .property-card h4,
   #featured-grid h2, #featured-grid h3, #featured-grid h4 {
-    font-size: 11.5px !important;              
+    font-size: 9px !important;              
     font-weight: 600 !important;
     color: #111827 !important;
     margin: 2px 0 4px 0 !important;
     padding: 0 !important;
-    line-height: 1.3 !important;
+    line-height: 1 !important;
   }
 
   /* Structural compression for addresses, text elements, and badges */
@@ -1624,7 +1624,7 @@ footer h4 {
     color: #4b5563 !important;
     margin: 1px 0 !important;       
     padding: 0 !important;
-    line-height: 1.3 !important;
+    line-height: 0.7 !important;
   }
 
   /* Force pricing values to anchor neatly right above the action row buttons */
@@ -1645,7 +1645,7 @@ footer h4 {
     width: 100% !important;
     margin-top: 6px !important;
     padding: 6px !important;                 
-    font-size: 10.5px !important;             
+    font-size: 8px !important;             
     font-weight: 500 !important;
     height: auto !important;
     box-sizing: border-box !important;
