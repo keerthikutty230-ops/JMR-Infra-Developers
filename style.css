@@ -1595,7 +1595,7 @@ footer h4 {
     box-sizing: border-box !important;
   }
 
-  /* 2. Format individual property cards to close up internal layout spaces */
+  /* 2. Format individual property cards to strip away all flex-stretching */
   .property-card, 
   .featured-properties .card {
     width: 100% !important;
@@ -1603,65 +1603,69 @@ footer h4 {
     margin: 0 !important;
     height: auto !important;          
     min-height: unset !important;      
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important; 
+    
+    /* CRITICAL RESET: Turns off flexbox behavior completely on mobile */
+    display: block !important; 
+    
     background: #ffffff !important;
     border-radius: 6px !important;
     overflow: hidden !important;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
   }
 
-  /* 3. Forces the image to sit firmly at the top with no bottom spacing */
+  /* 3. Keep the "New Apartment" title at the top */
+  .property-card h2, 
+  .property-card h3 {
+    font-size: 13px !important;
+    margin: 6px 8px !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* 4. Lock down the image so it flows like a normal block element */
   .property-card img, 
-  .featured-properties .card img {
+  .featured-properties .card img,
+  .property-card .img-container {
     width: 100% !important;
-    height: 120px !important;     
+    height: 130px !important;     
     object-fit: cover !important;
     display: block !important;
     margin: 0 !important;   
     padding: 0 !important;
   }
 
-  /* 4. Target the text container area directly underneath the image */
+  /* 5. Force the text body container to sit flush against the bottom of the image */
   .property-card .card-body,
+  .property-card .text-content,
   .property-card div:not(.img-container),
   .featured-properties .card-body {
-    padding: 6px 8px !important;    /* Tightens up the inner margins around text */
-    margin-top: 0 !important;       /* Removes space right below the image */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 2px !important;            /* Keeps elements inside clustered tightly */
+    padding: 6px 8px !important;    
+    margin: 0 !important; 
+    display: block !important; /* Disables inner flex alignment */
     height: auto !important;
     min-height: unset !important;
   }
 
-  /* 5. Clear text headings and paragraph padding shifts */
-  .property-card h2,
-  .property-card h3,
-  .featured-properties h2 {
-    font-size: 13px !important;
-    margin: 2px 0 !important; 
-    padding: 0 !important;
-    line-height: 1.2 !important;
-  }
-
-  .property-card p,
+  /* 6. Clean text line spacing */
+  .property-card .card-body h4,
+  .property-card .card-body p,
   .property-card span {
     font-size: 11px !important;
-    margin: 0 !important;       
+    margin: 4px 0 !important;       
     padding: 0 !important;
-    line-height: 1.2 !important;
+    line-height: 1.3 !important;
+    display: block !important;
   }
 
-  /* 6. Keep buttons tight at the bottom edge */
+  /* 7. Let the buttons stack naturally right under the text lines */
+  .property-card .buttons-wrapper,
   .property-card button,
   .property-card .btn,
   .property-card a {
     width: 100% !important;
-    margin: 6px 0 0 0 !important;
+    margin: 8px 0 4px 0 !important;
     padding: 6px !important;
     font-size: 11px !important;
     box-sizing: border-box !important;
+    display: inline-block !important;
   }
-}
