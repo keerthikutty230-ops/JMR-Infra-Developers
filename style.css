@@ -1469,3 +1469,59 @@ footer h4 {
     height: 100%;
     object-fit: cover;
 }
+/* Mobile Responsive Styles for About Us Section (Screens 768px and below) */
+@media screen and (max-width: 768px) {
+  
+  /* 1. Stack the about section row items vertically */
+  .row, .grid, div[class*="container"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* 2. Fix the individual card layout to stop text overlapping the image */
+  .about-card, 
+  .legacy-card,
+  div[class*="col-"] {
+    width: 100% !important;             
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    /* Stacks the text content and image vertically so nothing overlaps */
+    flex-direction: column-reverse !important; 
+    height: auto !important;           
+    min-height: unset !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* 3. Force the full image container to be completely visible */
+  .about-card img,
+  .legacy-card img,
+  div[class*="col-"] img,
+  .about-card .image-container,
+  div[class*="col-"] [class*="img"],
+  div[class*="col-"] svg {
+    width: 100% !important;
+    height: 200px !important; /* Sets a visible height for the image on mobile */
+    max-height: 250px !important;
+    object-fit: cover !important; /* Ensures the photo fills its space without distortion */
+    display: block !important;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+  }
+
+  /* 4. Reset the text content block so it stops floating over the picture */
+  .about-card .text-content,
+  div[class*="col-"] .card-body,
+  div[class*="col-"] > div:not([class*="img"]) {
+    width: 100% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+  }
+}
