@@ -1470,7 +1470,7 @@ footer h4 {
     object-fit: cover;
 }
 /* Mobile Responsive Styles for About Us Section (Screens 768px and below) */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 576px) {
   
   /* 1. Stack the about section row items vertically */
   .row, .grid, div[class*="container"] {
