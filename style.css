@@ -1510,55 +1510,77 @@ footer h4 {
   }
 }
 /* =============================================================
-   E-COMMERCE MINIFIED PRODUCT GRID STYLE FOR FEATURED PROPERTIES
-   (Applies strictly to mobile screens 576px and below)
+   MASTER RESPONSIVE ARCHITECTURE FOR JAVASCRIPT-GENERATED GRIDS
+   (Applies strictly to screens 576px and below)
    ============================================================= */
 @media screen and (max-width: 576px) {
 
-  /* 1. Reset the wrapper container to fit full-width grid columns */
+  /* 1. Viewport Hard Lock - Stops horizontal scrolling completely */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+
+  /* 2. Target the JavaScript Grid Container to force full width profile & equal height matching */
   .prop-grid,
-  #featured-grid {
+  #featured-grid,
+  section div[id*="grid"] {
     display: grid !important;
-    grid-template-columns: repeat(3, 2fr) !important; /* Forces perfect 50% split width */
-    grid-auto-rows: min-content !important;          /* Shrinks row boundaries tightly around cards */
-    align-items: stretch !important;                 /* Keeps card heights matching uniformly */
-    gap: 8px !important;                             /* Clean, tight gaps like image 2 */
+    grid-template-columns: repeat(2, 1fr) !important; /* Perfect 50% screen split */
+    align-items: stretch !important;                 /* Forces cards in the same row to match height */
+    gap: 8px !important;                             /* Tight spacing maximizes horizontal card width */
     padding: 8px !important;
     width: 100% !important;
     box-sizing: border-box !important;
     height: auto !important;
   }
 
-  /* 2. Format individual property cards into highly compact mini-frames */
+  /* 3. Strip all height presets from the cards and force vertical stack behavior */
   .property-card,
-  .prop-grid > div,
-  #featured-grid > div {
+  #featured-grid > div,
+  .prop-grid > div {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     
-    /* REMOVES ALL EXCESS HEIGHT AND SPACING CONTAINER SIZE */
-    height: auto !important;                 
+    width: 100% !important;
+    height: auto !important;                         /* Allows grid alignment to control equal heights */
     min-height: unset !important;            
     max-height: none !important;
     
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
-    border: 1px solid #e5e7eb !important;   /* Thin border outline matching the image format */
-    border-radius: 4px !important;          /* Subtle corner roundness */
+    border: 1px solid #e5e7eb !important;   
+    border-radius: 6px !important;          
     overflow: hidden !important;
     box-sizing: border-box !important;
   }
 
-  /* 3. Clamp the image to a static compact box frame */
+  /* 4. Target ANY intermediate container layout elements injected by your JS loop */
+  .property-card > div,
+  #featured-grid > div > div {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: none !important;
+    flex-grow: 0 !important;                        /* Erases invisible stretching spaces */
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 5. Force the injected images to lock safely at a uniform, compact ratio */
   .property-card img,
   #featured-grid img,
-  [class*="img-container"] {
+  .property-card [class*="img"],
+  #featured-grid [class*="img"] {
     width: 100% !important;
-    height: 140px !important;               /* Gives dominant presence to the image */
-    min-height: 140px !important;
-    max-height: 140px !important;
+    height: 135px !important;                       /* Standardizes building preview sizes */
+    min-height: 135px !important;
+    max-height: 135px !important;
     object-fit: cover !important;
     display: block !important;
     margin: 0 !important;
@@ -1566,16 +1588,17 @@ footer h4 {
     flex-grow: 0 !important;
   }
 
-  /* 4. Mini Content Block - Forces text to snap directly flush beneath the image */
+  /* 6. Text Zone: Snaps tight to image base and expands to fill out uniform card baselines */
   .property-card .card-body,
   .property-card [class*="body"],
-  .property-card [class*="content"] {
+  .property-card [class*="content"],
+  #featured-grid h3 + div {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    flex-grow: 1 !important;                 /* Allows inner items to stretch evenly if needed */
+    flex-grow: 1 !important;                         /* Automatically pushes prices/buttons evenly to bottom */
     
-    padding: 6px 8px !important;            /* Extremely minimal padding to clear extra margins */
+    padding: 8px !important;                        
     margin: 0 !important; 
     height: auto !important;
     min-height: unset !important;
@@ -1583,51 +1606,46 @@ footer h4 {
     background: #ffffff !important;
   }
 
-  /* 5. Downsize typography completely to fit the compact e-commerce layout */
-  .property-card h2, 
-  .property-card h3,
-  #featured-grid h2,
-  #featured-grid h3 {
-    font-size: 11px !important;              /* Small, tight text strings */
+  /* 7. Drop typography metrics inside JavaScript strings down to compact proportions */
+  .property-card h2, .property-card h3, .property-card h4,
+  #featured-grid h2, #featured-grid h3, #featured-grid h4 {
+    font-size: 11.5px !important;              
     font-weight: 600 !important;
     color: #111827 !important;
-    margin: 2px 0 !important;
+    margin: 2px 0 4px 0 !important;
     padding: 0 !important;
-    line-height: 1.2 !important;
+    line-height: 1.3 !important;
   }
 
-  /* Mini size adjustments for the descriptive location blocks and spans */
-  .property-card p, 
-  .property-card span,
-  #featured-grid p,
-  #featured-grid span {
-    font-size: 10px !important;              /* Ultra compact typography sizing */
+  /* Structural compression for addresses, text elements, and badges */
+  .property-card p, .property-card span,
+  #featured-grid p, #featured-grid span {
+    font-size: 10px !important;            
     color: #4b5563 !important;
     margin: 1px 0 !important;       
     padding: 0 !important;
-    line-height: 1.2 !important;
+    line-height: 1.3 !important;
   }
 
-  /* Specific sizing control for your bold pricing parameters */
-  .property-card [class*="price"], 
-  .property-card b, 
-  .property-card strong {
+  /* Force pricing values to anchor neatly right above the action row buttons */
+  .property-card [class*="price"], .property-card b, .property-card strong,
+  #featured-grid [class*="price"] {
     font-size: 12px !important;
     font-weight: 700 !important;
-    margin-top: 3px !important;
+    color: #1e40af !important;               
+    margin-top: auto !important;                    /* Forces layout alignment alignment alignment across cards */
+    padding-top: 4px !important;
     display: block !important;
   }
 
-  /* 6. Compact action buttons row at the base */
-  .property-card [class*="button"],
-  .property-card button,
-  .property-card .btn,
-  #featured-grid button {
+  /* 8. Pin action wrapper buttons down flush at the card's base layout */
+  .property-card [class*="button"], .property-card button, .property-card .btn,
+  #featured-grid button, #featured-grid [class*="btn"] {
     display: inline-block !important;
     width: 100% !important;
     margin-top: 6px !important;
-    padding: 4px 6px !important;           /* Slim button dimensions */
-    font-size: 10px !important;             /* Scaled down font */
+    padding: 6px !important;                 
+    font-size: 10.5px !important;             
     font-weight: 500 !important;
     height: auto !important;
     box-sizing: border-box !important;
