@@ -1470,9 +1470,12 @@ footer h4 {
     object-fit: cover;
 }
 /* Mobile Responsive Styles for About Us Section (Screens 768px and below) */
-@media screen and (max-width:576px) {
+/* =============================================================
+   MOBILE VIEW RESIZE, HARD OVERFLOW LOCK & CARD STACKING FIX
+   ============================================================= */
+@media screen and (max-width: 992px) {
   
-  /* 1. Hard lock the viewports to stop horizontal shifting completely */
+  /* 1. Global Viewport Lock - Completely stops the website from moving sideways */
   html, body {
     width: 100% !important;
     max-width: 100% !important;
@@ -1480,51 +1483,89 @@ footer h4 {
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
-    height: auto !important;
   }
 
-  /* 2. Force every section, row, and container to fit perfectly inside the mobile screen */
+  /* 2. Target Featured Properties & All Lower Sections to Hide Overflow */
+  section,
+  footer,
   .container,
   .container-fluid,
   .row,
-  .grid,
-  section,
-  header,
-  footer,
-  div {
+  .grid {
+    width: 100% !important;
     max-width: 100% !important;
+    overflow: hidden !important; /* Disables content spilling out */
     box-sizing: border-box !important;
   }
 
-  /* 3. Turn horizontal flex rows into vertical stacks so they stay within bounds */
-  .row, .grid, [style*="display: flex"] {
+  /* 3. Turn horizontal row layouts into clean vertical columns */
+  .row, .grid {
     display: flex !important;
     flex-direction: column !important;
-    width: 100% !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
   }
 
-  /* 4. Reset individual cards/columns so they drop below one another rather than overflowing */
-  div[class*="col-"],
-  .card,
-  .property-card,
-  .about-card {
+  /* 4. Universal Card Setup (Works for Featured Properties & About Us Cards) */
+  .card, 
+  .property-card, 
+  .about-card,
+  div[class*="col-"] {
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    margin-bottom: 24px !important;
     float: none !important;
-    position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    transform: none !important;
+    box-sizing: border-box !important;
+    
+    /* Enables flexbox ordering inside the cards */
+    display: flex !important;
+    flex-direction: column !important; 
   }
 
-  /* 5. Keep all images scaling inside their parent boxes */
-  img, svg {
-    max-width: 100% !important;
+  /* Force Images to the TOP (Order: 1) */
+  .card img, 
+  .property-card img, 
+  .about-card img,
+  [class*="img-container"],
+  .card svg {
+    order: 1 !important;
+    width: 100% !important;
     height: auto !important;
+    max-height: 250px !important;
+    object-fit: cover !important;
+    display: block !important;
+    position: relative !important;
+  }
+
+  /* Force Text Content to the MIDDLE (Order: 2) */
+  .card-body,
+  .text-content,
+  .card h1, .card h2, .card h3, .card p,
+  .property-card h2, .property-card p,
+  .about-card h1, .about-card p {
+    order: 2 !important;
+    width: 100% !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Force Buttons / Links to the BOTTOM (Order: 3) */
+  .card a, 
+  .card button,
+  .property-card a,
+  .property-card button,
+  .about-card a, 
+  .about-card button,
+  [class*="btn"],
+  a[href*="id="] {
+    order: 3 !important;
+    width: 100% !important; /* Full width button for easy mobile tapping */
+    text-align: center !important;
+    margin-top: 12px !important;
+    display: block !important;
   }
 }
