@@ -1476,11 +1476,11 @@ footer h4 {
     object-fit: cover;
 }
 /* =============================================================
-   MOBILE ARCHITECTURE (Applies strictly to screens 576px and below)
+   MOBILE VIEW RESIZE, HARD OVERFLOW LOCK & CARD STACKING FIX
    ============================================================= */
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 992px) {
   
-  /* 1. Global Viewport Lock - Keeps website background flat and static */
+  /* 1. Global Viewport Lock - Completely stops the website from moving sideways */
   html, body {
     width: 100% !important;
     max-width: 100% !important;
@@ -1490,186 +1490,22 @@ footer h4 {
     position: relative !important;
   }
 
-  /* ======================================================
-     SEPARATE SPECIFIC FIX: FEATURED PROPERTIES CARDS ONLY
-     ====================================================== */
-  
-  /* Target the outer properties section grid wrapper */
-  .featured-properties-container, 
-  .cards-grid,
-  .featured-properties .row {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Forces 2 cards per row side-by-side */
-    grid-auto-rows: min-content !important; 
-    align-items: start !important;          
-    gap: 12px !important; 
-    padding: 10px !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  /* Force the properties cards to completely drop their desktop height stretch */
-  .property-card, 
-  .featured-properties .card {
-    display: flex !important;
-    flex-direction: column !important;     /* Re-enable flex layout */
-    justify-content: flex-start !important; /* Force all internal text elements upwards */
+  /* 2. Target Featured Properties & All Lower Sections to Hide Overflow */
+  section,
+  footer,
+  .container,
+  .container-fluid,
+  .row,
+  .grid {
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;                /* DESTROYS THE RIGID VERTICAL GAP STRETCH */
-    min-height: unset !important;           
-    max-height: none !important;
-    margin: 0 !important;
-    background: #ffffff !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
+    overflow: hidden !important; /* Disables content spilling out */
+    box-sizing: border-box !important;
   }
 
-  /* Reset layout parameters for the inner wrapper element inside your card */
-  .property-card > div,
-  .featured-properties .card > div {
-    height: auto !important;
-    min-height: unset !important;
-    flex-grow: 0 !important; /* Completely blocks the text box layer from pulling downwards */
-  }
-
-  /* Force the property images to stay locked at a fixed small frame */
-  .property-card img, 
-  .featured-properties .card img {
-    width: 100% !important;
-    height: 120px !important; 
-    min-height: 120px !important;
-    max-height: 120px !important;
-    object-fit: cover !important;
-    display: block !important;
-    margin: 0 !important;
-    flex-grow: 0 !important;
-  }
-
-  /* Lock the text details frame tightly against the bottom edge of the image */
-  .property-card .card-body,
-  .featured-properties .card-body {
+  /* 3. Turn horizontal row layouts into clean vertical columns */
+  .row, .grid {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-start !important;
-    flex-grow: 0 !important; /* Completely stops vertical structural expanding */
-    padding: 8px !important;    
-    margin: 0 !important; 
-    height: auto !important;
-    min-height: unset !important;
-  }
-
-  /* Trim extra padding gaps under location titles & prices lines */
-  .property-card h2, 
-  .property-card h3, 
-  .property-card h4, 
-  .property-card p, 
-  .property-card span {
-    margin: 2px 0 !important;
-    padding: 0 !important;
-    height: auto !important;
-    min-height: unset !important;
-  }
-}
-/* =============================================================
-   MOBILE ARCHITECTURE: FEATURED PROPERTIES SPACE FIX ONLY
-   (Applies strictly to mobile screens 576px and below)
-   ============================================================= */
-@media screen and (max-width: 576px) {
-
-  /* 1. Reset the grid container so it forces rows to wrap tight */
-  .prop-grid,
-  #featured-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Force 2-columns side-by-side */
-    grid-auto-rows: min-content !important;          /* Rows shrink to the size of the contents */
-    align-items: start !important;                   /* Pulls all cards up to the top line */
-    gap: 12px !important; 
-    padding: 10px !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  /* 2. Strip ALL inherited heights from the property cards */
-  .property-card,
-  #featured-grid > div,
-  .prop-grid > div {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important; /* Locks text directly under the image container */
-    
-    /* CRITICAL HEIGHT RESETS */
-    height: auto !important;                 /* Erases fixed height values causing the white space */
-    min-height: 0 !important;                
-    max-height: none !important;
-    
-    margin: 0 !important;
-    background: #ffffff !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
-  }
-
-  /* 3. Handle intermediate wrapper containers generated by JS */
-  .property-card > div,
-  #featured-grid > div > div {
-    height: auto !important;
-    min-height: 0 !important;
-    flex-grow: 0 !important; /* Destroys invisible stretching gaps */
-  }
-
-  /* 4. Enforce strict image box sizes */
-  .property-card img,
-  #featured-grid img,
-  [class*="img-container"] {
-    width: 100% !important;
-    height: 125px !important; /* Uniform height boundaries for the house images */
-    min-height: 125px !important;
-    max-height: 125px !important;
-    object-fit: cover !important;
-    display: block !important;
-    margin: 0 !important;
-    flex-grow: 0 !important;
-  }
-
-  /* 5. Force the text box card body right flush against the image bottom edge */
-  .property-card .card-body,
-  .property-card [class*="body"],
-  .property-card [class*="content"],
-  #featured-grid h2 + div {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    flex-grow: 0 !important;
-    
-    padding: 8px !important;    
-    margin: 0 !important; 
-    height: auto !important;
-    min-height: 0 !important;
-  }
-
-  /* 6. Collapse typography margins inside the text block completely */
-  .property-card h2, 
-  .property-card h3, 
-  .property-card p, 
-  .property-card span,
-  #featured-grid p,
-  #featured-grid span {
-    margin: 2px 0 !important;
-    padding: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    line-height: 1.3 !important;
-  }
-
-  /* 7. Align action button rows tightly at the base */
-  .property-card button,
-  .property-card .btn,
-  .property-card a,
-  #featured-grid button {
-    margin-top: 6px !important;
-    padding: 6px !important;
-    font-size: 11px !important;
-    height: auto !important;
   }
 }
