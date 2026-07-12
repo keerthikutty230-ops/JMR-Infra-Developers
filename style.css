@@ -1519,7 +1519,7 @@ footer h4 {
   .prop-grid,
   #featured-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Forces perfect 50% split width */
+    grid-template-columns: repeat(3, 2fr) !important; /* Forces perfect 50% split width */
     grid-auto-rows: min-content !important;          /* Shrinks row boundaries tightly around cards */
     align-items: stretch !important;                 /* Keeps card heights matching uniformly */
     gap: 8px !important;                             /* Clean, tight gaps like image 2 */
