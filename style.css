@@ -1509,3 +1509,109 @@ footer h4 {
     flex-direction: column !important;
   }
 }
+/* =============================================================
+   MOBILE ARCHITECTURE: 2-COLUMN FEATURED PROPERTIES CARD FIX
+   (Applies strictly to screens 576px and below)
+   ============================================================= */
+@media screen and (max-width: 576px) {
+
+  /* 1. Target the correct javascript layout container */
+  .prop-grid,
+  #featured-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Forces exactly two cards side-by-side */
+    grid-auto-rows: min-content !important;          /* Collapses the grid rows tightly around contents */
+    align-items: start !important;                   /* Keeps both cards anchored to the top frame line */
+    gap: 10px !important;                            /* Tight, uniform spacing between the two columns */
+    padding: 10px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* 2. Format individual property cards to drop lingering heights */
+  .property-card,
+  .prop-grid > div,
+  #featured-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Pin text content right up against the image boundary */
+    
+    /* CRITICAL HEIGHT RESETS: Destroys the vertical white space */
+    height: auto !important;                 
+    min-height: 0 !important;                
+    max-height: none !important;
+    
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3. Strip extra spaces from any intermediate wrapper containers */
+  .property-card > div,
+  #featured-grid > div > div {
+    height: auto !important;
+    min-height: 0 !important;
+    flex-grow: 0 !important;
+  }
+
+  /* 4. Clamp the image to a small, neat static block frame */
+  .property-card img,
+  #featured-grid img,
+  [class*="img-container"] {
+    width: 100% !important;
+    height: 125px !important; /* Uniform height boundaries for the house pictures */
+    min-height: 125px !important;
+    max-height: 125px !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 !important;
+    flex-grow: 0 !important;
+  }
+
+  /* 5. Force the text wrapper area flush against the image base */
+  .property-card .card-body,
+  .property-card [class*="body"],
+  .property-card [class*="content"] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    flex-grow: 0 !important;
+    
+    padding: 8px !important;    
+    margin: 0 !important; 
+    height: auto !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 6. Tighten structural text line margins completely */
+  .property-card h2, 
+  .property-card h3, 
+  .property-card p, 
+  .property-card span,
+  #featured-grid h2,
+  #featured-grid p,
+  #featured-grid span {
+    margin: 2px 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* 7. Align Call & WhatsApp button elements tightly at the card bottom */
+  .property-card button,
+  .property-card .btn,
+  .property-card a,
+  #featured-grid button,
+  #featured-grid a {
+    margin-top: 6px !important;
+    padding: 6px !important;
+    font-size: 11px !important;
+    height: auto !important;
+  }
+}
