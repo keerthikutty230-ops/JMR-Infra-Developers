@@ -1519,7 +1519,7 @@ footer h4 {
   .prop-grid,
   #featured-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important; /* Forces exactly two cards side-by-side */
+    grid-template-columns: repeat(2, 2fr) !important; /* Forces exactly two cards side-by-side */
     grid-auto-rows: min-content !important;          /* Collapses the grid rows tightly around contents */
     align-items: start !important;                   /* Keeps both cards anchored to the top frame line */
     gap: 10px !important;                            /* Tight, uniform spacing between the two columns */
@@ -1600,7 +1600,7 @@ footer h4 {
     padding: 0 !important;
     height: auto !important;
     min-height: 0 !important;
-    line-height: 1.3 !important;
+    line-height: 0.6 !important;
   }
 
   /* 7. Align Call & WhatsApp button elements tightly at the card bottom */
