@@ -1584,102 +1584,147 @@ footer h4 {
 /* ==========================================
    FEATURED PROPERTIES - MOBILE 2-COLUMN VIEW
    ========================================== */
+/* =============================================================
+   MOBILE ARCHITECTURE: ZERO GAPS & PERFECT RE-ORDERING (576px and below)
+   ============================================================= */
 @media screen and (max-width: 576px) {
   
-  /* 1. Target the grid/row container and prevent it from forcing row heights */
+  /* 1. GLOBAL LOCK: Prevents horizontal scrolling */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+
+  section, footer, .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important; 
+    box-sizing: border-box !important;
+  }
+
+  /* ==========================================
+     SECTION 1: SERVICES / ABOUT US CARDS
+     ========================================== */
+  
+  /* Container setup with ZERO gap */
+  .services-stack-container {
+    display: flex !important;
+    flex-direction: column !important; 
+    gap: 0 !important;       /* REMOVES GAP BETWEEN CARDS */
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Card setup flush against each other */
+  .service-stacked-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;    /* REMOVES MARGIN SPACING */
+    border-radius: 0 !important; /* Squares off corners so they sit flush */
+    height: auto !important;
+    min-height: unset !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Maintain Card Background Colors */
+  .service-stacked-card.communication-bg { background-color: #fcefe9 !important; }
+  .service-stacked-card.involvement-bg   { background-color: #677E61 !important; } 
+  .service-stacked-card.academic-bg      { background-color: #f1f0f8 !important; }
+  .service-stacked-card.choice-bg        { background-color: #677E61 !important; }
+  .service-stacked-card.trust-bg         { background-color: #78A4CB !important; }
+
+  /* Strict Image ➔ Matter ➔ Button Ordering */
+  .card-inner-layout {
+    display: flex !important;
+    flex-direction: column !important; 
+    width: 100% !important;
+    background: transparent !important;
+  }
+
+  /* Image at Top */
+  .stacked-card-image {
+    order: 1 !important; 
+    width: 100% !important;
+    height: auto !important;
+  }
+  .stacked-card-image img {
+    width: 100% !important;
+    height: 240px !important; 
+    object-fit: cover !important; 
+    display: block !important;
+    border-radius: 0 !important;
+  }
+
+  /* Matter in Middle */
+  .stacked-card-content {
+    order: 2 !important; 
+    width: 100% !important;
+    padding: 20px 15px 10px 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Button at Bottom */
+  .btn-card.card-redirect {
+    order: 3 !important; 
+    display: block !important;
+    width: calc(100% - 30px) !important; 
+    margin: 15px auto !important;
+    text-align: center !important;
+  }
+
+  /* ==========================================
+     SECTION 2: FEATURED PROPERTIES GRID
+     ========================================== */
+  
+  /* 2-Column Grid with ZERO gap */
   .featured-properties-container, 
   .cards-grid,
   .featured-properties .row {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important; 
-    grid-auto-rows: min-content !important; /* CRITICAL: Prevents rows from expanding vertically */
-    align-items: start !important;          /* CRITICAL: Aligns cards to the top instead of stretching them */
-    gap: 12px !important;                             
-    padding: 10px !important;
+    grid-auto-rows: min-content !important; 
+    align-items: start !important;          
+    gap: 0 !important;           /* REMOVES GAP BETWEEN GRID CARDS */
+    padding: 0 !important;
+    margin: 0 !important;
     width: 100% !important;
-    box-sizing: border-box !important;
-    height: auto !important;
   }
 
-  /* 2. Strip ALL heights from the property cards */
+  /* Compact property cards sitting flush */
   .property-card, 
   .featured-properties .card {
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 !important;
-    
-    /* CRITICAL HEIGHT DESTROYERS */
+    margin: 0 !important;        /* REMOVES CARD MARGINS */
+    border-radius: 0 !important; /* Sits flush with neighboring cards */
     height: auto !important;          
     min-height: 0 !important;
-    max-height: none !important;      
-    
-    display: block !important; /* Turns off any internal elastic flex behaviors */
+    display: block !important;   /* Prevents internal vertical gaps */
     background: #ffffff !important;
-    border-radius: 6px !important;
     overflow: hidden !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+    border: 1px solid #eeeeee !important; /* Very subtle border to distinguish cards since there is no gap */
   }
 
-  /* 3. Keep the "New Apartment" text styled smoothly at the top */
-  .property-card h2, 
-  .property-card h3 {
-    font-size: 13px !important;
-    margin: 6px 8px !important;
-    padding: 0 !important;
-    display: block !important;
-    height: auto !important;
-  }
-
-  /* 4. Lock down the image to a static, non-stretching height */
   .property-card img, 
-  .featured-properties .card img,
-  .property-card .img-container {
+  .featured-properties .card img {
     width: 100% !important;
-    height: 120px !important; /* Fixed crisp aspect ratio */
-    min-height: 120px !important;
-    max-height: 120px !important;
+    height: 120px !important; 
     object-fit: cover !important;
     display: block !important;
-    margin: 0 !important;   
-    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  /* 5. Force the text container to collapse instantly under the image */
   .property-card .card-body,
-  .property-card .text-content,
-  .property-card div:not(.img-container),
   .featured-properties .card-body {
     padding: 6px 8px !important;    
     margin: 0 !important; 
-    display: block !important; 
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-  }
-
-  /* 6. Tighten margins for location details and price strings */
-  .property-card h4,
-  .property-card p,
-  .property-card span {
-    font-size: 11px !important;
-    margin: 4px 0 !important;       
-    padding: 0 !important;
-    line-height: 1.3 !important;
     display: block !important;
-    height: auto !important;
-  }
-
-  /* 7. Let buttons drop cleanly into place at the absolute bottom */
-  .property-card .buttons-wrapper,
-  .property-card button,
-  .property-card .btn,
-  .property-card a {
-    width: 100% !important;
-    margin: 8px 0 4px 0 !important;
-    padding: 6px !important;
-    font-size: 11px !important;
-    box-sizing: border-box !important;
-    display: inline-block !important;
     height: auto !important;
   }
 }
