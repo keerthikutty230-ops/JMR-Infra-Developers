@@ -1651,3 +1651,210 @@ footer h4 {
     box-sizing: border-box !important;
   }
 }
+services-section {
+    padding: 60px 10% 120px 10%;
+    background-color: hsl(32, 20%, 50%);
+    text-align: center;
+}
+
+.section-subtitle {
+    color: #8C6247;
+    font-size: 29px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 17.5px;
+    margin-bottom: 60px;
+    font-family: Sans-Serif;
+    font-style: italic;
+    margin-top: 17px;
+    text-align: center;
+}
+
+.services-stack-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.service-stacked-card {
+    position: sticky;
+    top: 120px;
+    min-height: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    transform-origin: center top;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+}
+
+/* Background aesthetic classes including new ones */
+.communication-bg {
+    background-color: #D3B574;
+    color: #111111;
+}
+
+.involvement-bg {
+    background-color: #5E6A4B;
+    color: #FFFFFF;
+}
+
+.academic-bg {
+    background-color: #8A6D73;
+    color: #FFFFFF;
+}
+
+/* Added accent */
+.holistic-bg {
+    background-color: #4A3325;
+    color: #FFFFFF;
+}
+
+.cultural-bg {
+    background-color: #2E424D;
+    color: #FFFFFF;
+}
+
+/* Added accent */
+
+.card-inner-layout {
+    display: flex;
+    height: 100%;
+    min-height: 450px;
+    align-items: center;
+}
+
+.stacked-card-content {
+    flex: 1;
+    padding: 50px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stacked-card-content h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.stacked-card-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.stacked-card-image {
+    flex: 1;
+    height: 100%;
+}
+
+.stacked-card-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+    object-fit: cover;
+    display: block;
+}
+
+.btn-card {
+    align-self: flex-start;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn-card:hover {
+    transform: scale(1.05);
+}
+/* =============================================================
+   MOBILE VIEW: PREMIUM STACKED LAYERED CARDS MECHANICS
+   (Applies strictly to mobile screens 576px and below)
+   ============================================================= */
+@media screen and (max-width: 576px) {
+  
+  /* 1. Viewport Overhaul - Ensures sticky tracking works smoothly */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+
+  /* 2. Target the main parent container holding your services cards */
+  .services-stack-container,
+  #featured-grid,
+  .prop-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;              /* Remove standard spacing so cards can overlap */
+    padding: 20px 15px !important;  /* Clean side padding for mobile framing */
+    height: auto !important;
+    position: relative !important;
+  }
+
+  /* 3. The Core Card Setup - Turning individual cards into STICKY layers */
+  .service-stacked-card,
+  .property-card,
+  .services-stack-container > div {
+    position: -webkit-sticky !important; /* Safari compatibility */
+    position: sticky !important;         /* Makes the card stick during scroll */
+    
+    /* CRITICAL OFFSET: This leaves exactly enough room at the top 
+       so previous cards peek out like a stacked deck */
+    top: 80px !important;                
+    
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 40px !important;      /* Creates scrolling depth between cards */
+    
+    border-radius: 24px !important;      /* Smooth elegant rounded card edges */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important; /* Casts shadow upward onto the card behind it */
+    overflow: hidden !important;
+    height: auto !important;
+    min-height: unset !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 4. DYNAMIC DEPTH SHADOWS & OFFSET PEAKS (Tied by DOM Order)
+     Each child card gets pushed slightly further down its z-axis plane 
+     and given a staggered top position so they align perfectly.
+  */
+  .services-stack-container > div:nth-child(1) { top: 80px !important; z-index: 1 !important; }
+  .services-stack-container > div:nth-child(2) { top: 100px !important; z-index: 2 !important; }
+  .services-stack-container > div:nth-child(3) { top: 120px !important; z-index: 3 !important; }
+  .services-stack-container > div:nth-child(4) { top: 140px !important; z-index: 4 !important; }
+  .services-stack-container > div:nth-child(5) { top: 160px !important; z-index: 5 !important; }
+
+  /* 5. Clean Inner Card Content Order Structure */
+  .card-inner-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: transparent !important;
+  }
+
+  /* Force elements to match layout requests cleanly if needed */
+  .stacked-card-content {
+    padding: 30px 24px !important;       /* Comfortable breathing space inside the card */
+    box-sizing: border-box !important;
+  }
+
+  .stacked-card-image img {
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+}
