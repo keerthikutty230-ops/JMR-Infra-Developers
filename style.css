@@ -1526,18 +1526,19 @@ footer h4 {
   }
 
   /* 2. Target the JavaScript Grid Container to force full width profile & equal height matching */
-  .prop-grid,
-  #featured-grid,
-  section div[id*="grid"] {
-    display: grid !important;
-    grid-template-columns: repeat(2, 4fr) !important; /* Perfect 50% screen split */
-    align-items: stretch !important;                 /* Forces cards in the same row to match height */
-    gap: 8px !important;                             /* Tight spacing maximizes horizontal card width */
-    padding: 8px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    height: auto !important;
-  }
+ .prop-grid,
+#featured-grid,
+section div[id*="grid"] {
+  display: grid !important;
+  grid-template-columns: 1fr !important; /* <--- CHANGE THIS TO 1fr TO STACK CARDS */
+  align-items: stretch !important; 
+  row-gap: 24px !important; /* <--- THIS WILL NOW CREATES THE GAP BETWEEN CARDS */
+  gap: 24px 0px !important;
+  padding: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+}
 
   /* 3. Strip all height presets from the cards and force vertical stack behavior */
   .property-card,
@@ -1546,13 +1547,11 @@ footer h4 {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    
     width: 100% !important;
     height: auto !important;                         /* Allows grid alignment to control equal heights */
     min-height: unset !important;            
     max-height: none !important;
-    
-    margin: 0 !important;
+    margin-bottom: 35px !important;
     padding: 0 !important;
     background: #ffffff !important;
     border: 1px solid #e5e7eb !important;   
@@ -1562,15 +1561,12 @@ footer h4 {
   }
 
   /* 4. Target ANY intermediate container layout elements injected by your JS loop */
-  .property-card > div,
-  #featured-grid > div > div {
-    height: auto !important;
-    min-height: unset !important;
-    max-height: none !important;
-    flex-grow: 1 !important;                        /* Erases invisible stretching spaces */
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+ .property-card,
+ #featured-grid > div {
+   margin-bottom: 30px !important; 
+  width: 100% !important;          
+   height: auto !important; /* <--- CHANGE THIS TO auto !important */
+ }
 
   /* 5. Force the injected images to lock safely at a uniform, compact ratio */
   .property-card img,
@@ -1578,14 +1574,10 @@ footer h4 {
   .property-card [class*="img"],
   #featured-grid [class*="img"] {
     width: 100% !important;
-    height: 115px !important;                       /* Standardizes building preview sizes */
-    min-height: 115px !important;
-    max-height: 115px !important;
+    height: 420px !important;                       /* Standardizes building preview sizes */
     object-fit: cover !important;
     display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex-grow: 0 !important;
+   
   }
 
   /* 6. Text Zone: Snaps tight to image base and expands to fill out uniform card baselines */
@@ -1810,15 +1802,10 @@ services-section {
   .services-stack-container > div {
     position: -webkit-sticky !important; /* Safari compatibility */
     position: sticky !important;         /* Makes the card stick during scroll */
-    
-    /* CRITICAL OFFSET: This leaves exactly enough room at the top 
-       so previous cards peek out like a stacked deck */
     top: 80px !important;                
-    
     width: 100% !important;
     max-width: 100% !important;
     margin-bottom: 40px !important;      /* Creates scrolling depth between cards */
-    
     border-radius: 24px !important;      /* Smooth elegant rounded card edges */
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important; /* Casts shadow upward onto the card behind it */
     overflow: hidden !important;
@@ -1843,6 +1830,7 @@ services-section {
     flex-direction: column !important;
     width: 100% !important;
     background: transparent !important;
+    margin-bottom: 24px !important;
   }
 
   /* Force elements to match layout requests cleanly if needed */
