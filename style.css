@@ -1475,374 +1475,71 @@ footer h4 {
     height: 100%;
     object-fit: cover;
 }
-/* =============================================================
-   MOBILE VIEW RESIZE, HARD OVERFLOW LOCK & CARD STACKING FIX
-   ============================================================= */
-@media screen and (max-width: 992px) {
-  
-  /* 1. Global Viewport Lock - Completely stops the website from moving sideways */
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-  }
 
-  /* 2. Target Featured Properties & All Lower Sections to Hide Overflow */
-  section,
-  footer,
-  .container,
-  .container-fluid,
-  .row,
-  .grid {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important; /* Disables content spilling out */
-    box-sizing: border-box !important;
-  }
-
-  /* 3. Turn horizontal row layouts into clean vertical columns */
-  .row, .grid {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-}
-/* =============================================================
-   MASTER RESPONSIVE ARCHITECTURE FOR JAVASCRIPT-GENERATED GRIDS
-   (Applies strictly to screens 576px and below)
-   ============================================================= */
-@media screen and (max-width: 576px) {
-
-  /* 1. Viewport Hard Lock - Stops horizontal scrolling completely */
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-  }
-
-  /* 2. Target the JavaScript Grid Container to force full width profile & equal height matching */
- .prop-grid,
-#featured-grid,
-section div[id*="grid"] {
-  display: grid !important;
-  grid-template-columns: 1fr !important; /* <--- CHANGE THIS TO 1fr TO STACK CARDS */
-  align-items: stretch !important; 
-  row-gap: 24px !important; /* <--- THIS WILL NOW CREATES THE GAP BETWEEN CARDS */
-  gap: 24px 0px !important;
-  padding: 8px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  height: auto !important;
+/* --- Booking Form Container --- */
+.booking-form {
+    max-width: 450px;
+    padding: 24px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+    /* Matches standard clean web fonts */
 }
 
-  /* 3. Strip all height presets from the cards and force vertical stack behavior */
-  .property-card,
-  #featured-grid > div,
-  .prop-grid > div {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    width: 100% !important;
-    height: auto !important;                         /* Allows grid alignment to control equal heights */
-    min-height: unset !important;            
-    max-height: none !important;
-    margin-bottom: 35px !important;
-    padding: 0 !important;
-    background: #ffffff !important;
-    border: 1px solid #e5e7eb !important;   
-    border-radius: 6px !important;          
-    overflow: hidden !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 4. Target ANY intermediate container layout elements injected by your JS loop */
- .property-card,
- #featured-grid > div {
-   margin-bottom: 30px !important; 
-  width: 100% !important;          
-   height: auto !important; /* <--- CHANGE THIS TO auto !important */
- }
-
-  /* 5. Force the injected images to lock safely at a uniform, compact ratio */
-  .property-card img,
-  #featured-grid img,
-  .property-card [class*="img"],
-  #featured-grid [class*="img"] {
-    width: 100% !important;
-    height: 420px !important;                       /* Standardizes building preview sizes */
-    object-fit: cover !important;
-    display: block !important;
-   
-  }
-
-  /* 6. Text Zone: Snaps tight to image base and expands to fill out uniform card baselines */
-  .property-card .card-body,
-  .property-card [class*="body"],
-  .property-card [class*="content"],
-  #featured-grid h3 + div {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    flex-grow: 1 !important;                         /* Automatically pushes prices/buttons evenly to bottom */
-    
-    /* padding: 8px !important;                         */
-    margin: 0 !important; 
-    height: auto !important;
-    min-height: unset !important;
-    box-sizing: border-box !important;
-    background: #ffffff !important;
-  }
-
-  /* 7. Drop typography metrics inside JavaScript strings down to compact proportions */
-  .property-card h2, .property-card h3, .property-card h4,
-  #featured-grid h2, #featured-grid h3, #featured-grid h4 {
-    font-size: 9px !important;              
-    font-weight: 600 !important;
-    color: #111827 !important;
-    margin: 2px 0 4px 0 !important;
-    padding: 0 !important;
-    line-height: 1 !important;
-  }
-
-  /* Structural compression for addresses, text elements, and badges */
-  .property-card p, .property-card span,
-  #featured-grid p, #featured-grid span {
-    font-size: 10px !important;            
-    color: #4b5563 !important;
-    margin: 1px 0 !important;       
-    padding: 0 !important;
-    line-height: 0.7 !important;
-  }
-
-  /* Force pricing values to anchor neatly right above the action row buttons */
-  .property-card [class*="price"], .property-card b, .property-card strong,
-  #featured-grid [class*="price"] {
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    color: #1e40af !important;               
-    margin-top: auto !important;                    /* Forces layout alignment alignment alignment across cards */
-    padding-top: 4px !important;
-    display: block !important;
-  }
-
-  /* 8. Pin action wrapper buttons down flush at the card's base layout */
-  .property-card [class*="button"], .property-card button, .property-card .btn,
-  #featured-grid button, #featured-grid [class*="btn"] {
-    display: inline-block !important;
-    width: 100% !important;
-    margin-top: 6px !important;
-    padding: 6px !important;                 
-    font-size: 8px !important;             
-    font-weight: 500 !important;
-    height: auto !important;
-    box-sizing: border-box !important;
-  }
-}
-services-section {
-    padding: 60px 10% 120px 10%;
-    background-color: hsl(32, 20%, 50%);
-    text-align: center;
-}
-
-.section-subtitle {
-    color: #8C6247;
-    font-size: 29px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 17.5px;
-    margin-bottom: 60px;
-    font-family: Sans-Serif;
-    font-style: italic;
-    margin-top: 17px;
-    text-align: center;
-}
-
-.services-stack-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.service-stacked-card {
-    position: sticky;
-    top: 120px;
-    min-height: 450px;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-    transform-origin: center top;
-    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
-}
-
-/* Background aesthetic classes including new ones */
-.communication-bg {
-    background-color: #D3B574;
-    color: #111111;
-}
-
-.involvement-bg {
-    background-color: #5E6A4B;
-    color: #FFFFFF;
-}
-
-.academic-bg {
-    background-color: #8A6D73;
-    color: #FFFFFF;
-}
-
-/* Added accent */
-.holistic-bg {
-    background-color: #4A3325;
-    color: #FFFFFF;
-}
-
-.cultural-bg {
-    background-color: #2E424D;
-    color: #FFFFFF;
-}
-
-/* Added accent */
-
-.card-inner-layout {
-    display: flex;
-    height: 100%;
-    min-height: 450px;
-    align-items: center;
-}
-
-.stacked-card-content {
-    flex: 1;
-    padding: 50px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.stacked-card-content h3 {
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-
-.stacked-card-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    opacity: 0.9;
-}
-
-.stacked-card-image {
-    flex: 1;
-    height: 100%;
-}
-
-.stacked-card-image img {
-    width: 100%;
-    height: 100%;
-    min-height: 450px;
-    object-fit: cover;
+/* --- Labels --- */
+.booking-form label {
     display: block;
-}
-
-.btn-card {
-    align-self: flex-start;
-    background-color: #000000;
-    color: #FFFFFF;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
+    color: #333333;
+    margin-bottom: 6px;
+    margin-top: 16px;
+}
+
+.booking-form label:first-child {
+    margin-top: 0;
+}
+
+/* --- Inputs & Select Menus --- */
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+    /* Keeps inputs from stretching past 100% width */
+    transition: all 0.3s ease;
+}
+
+/* Highlight input fields when the user clicks on them */
+.booking-form input:focus,
+.booking-form select:focus {
+    outline: none;
+    border-color: #0056b3;
+    /* A nice theme blue */
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
+}
+
+/* --- WhatsApp Confirm Button --- */
+.booking-form button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    background-color: #25D366;
+    /* Official WhatsApp Green */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
-.btn-card:hover {
-    transform: scale(1.05);
-}
-/* =============================================================
-   MOBILE VIEW: PREMIUM STACKED LAYERED CARDS MECHANICS
-   (Applies strictly to mobile screens 576px and below)
-   ============================================================= */
-@media screen and (max-width: 576px) {
-  
-  /* 1. Viewport Overhaul - Ensures sticky tracking works smoothly */
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    position: relative !important;
-  }
-
-  /* 2. Target the main parent container holding your services cards */
-  .services-stack-container,
-  #featured-grid,
-  .prop-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;              /* Remove standard spacing so cards can overlap */
-    padding: 20px 15px !important;  /* Clean side padding for mobile framing */
-    height: auto !important;
-    position: relative !important;
-  }
-
-  /* 3. The Core Card Setup - Turning individual cards into STICKY layers */
-  .service-stacked-card,
-  .property-card,
-  .services-stack-container > div {
-    position: -webkit-sticky !important; /* Safari compatibility */
-    position: sticky !important;         /* Makes the card stick during scroll */
-    top: 80px !important;                
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-bottom: 40px !important;      /* Creates scrolling depth between cards */
-    border-radius: 24px !important;      /* Smooth elegant rounded card edges */
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important; /* Casts shadow upward onto the card behind it */
-    overflow: hidden !important;
-    height: auto !important;
-    min-height: unset !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 4. DYNAMIC DEPTH SHADOWS & OFFSET PEAKS (Tied by DOM Order)
-     Each child card gets pushed slightly further down its z-axis plane 
-     and given a staggered top position so they align perfectly.
-  */
-  .services-stack-container > div:nth-child(1) { top: 80px !important; z-index: 1 !important; }
-  .services-stack-container > div:nth-child(2) { top: 100px !important; z-index: 2 !important; }
-  .services-stack-container > div:nth-child(3) { top: 120px !important; z-index: 3 !important; }
-  .services-stack-container > div:nth-child(4) { top: 140px !important; z-index: 4 !important; }
-  .services-stack-container > div:nth-child(5) { top: 160px !important; z-index: 5 !important; }
-
-  /* 5. Clean Inner Card Content Order Structure */
-  .card-inner-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    background: transparent !important;
-    margin-bottom: 24px !important;
-  }
-
-  /* Force elements to match layout requests cleanly if needed */
-  .stacked-card-content {
-    padding: 30px 24px !important;       /* Comfortable breathing space inside the card */
-    box-sizing: border-box !important;
-  }
-
-  .stacked-card-image img {
-    width: 100% !important;
-    height: 250px !important;
-    object-fit: cover !important;
-    display: block !important;
-  }
+/* Darker green when hovering over the button */
+.booking-form button:hover {
+    background-color: #128C7E;
 }

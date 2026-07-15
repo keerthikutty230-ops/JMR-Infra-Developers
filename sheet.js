@@ -55,8 +55,8 @@ const PROPERTIES = [
     P("Vijayawada", "Apartment", 7800000, 1100, "", "Sold- 2BHK", true, "https://i.postimg.cc/kXqr6nM4/RAMAKRISHNAPURAM.png", "Ramakrishnapuram,Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
     P("Vijayawada", "Apartment", 6400000, 1100, "", "Sold- 3BHK", true, "https://i.postimg.cc/PqL0sJyF/CURRENCY-NAGAR.png", "Currency Nagar,Back Side Ayush Hospitals, Vijayawada-520015, Andhra Pradesh"),
     P("Vijayawada", "Buy", 8800000, 1100, "", "Sold-Individual", true, "https://i.postimg.cc/xTtZXMFB/PRASHANTHI-NAGAR.png", "Prashanthi Nagar,Road No-1,Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
-       P("Vijayawada", "Land", 6500, 1100, "","4 acres", true, "https://i.postimg.cc/g28TbyM9/KANCHARLA.png", "Kancherla,Non-layout,Near Nandigama, Vijayawada-520015, Andhra Pradesh"),
-        P("Vijayawada", "Land", 12000, 1100, "", "5 acres", true, "https://i.postimg.cc/MK4CSpqh/G-KONDURU.png", "G-konduru,Vijayawada-520015, Andhra Pradesh")
+    P("Vijayawada", "Land", 6500, 1100, "", "4 acres", true, "https://i.postimg.cc/g28TbyM9/KANCHARLA.png", "Kancherla,Non-layout,Near Nandigama, Vijayawada-520015, Andhra Pradesh"),
+    P("Vijayawada", "Land", 12000, 1100, "", "5 acres", true, "https://i.postimg.cc/MK4CSpqh/G-KONDURU.png", "G-konduru,Vijayawada-520015, Andhra Pradesh")
 ];
 
 const TYPE_ICON = {
@@ -633,31 +633,37 @@ renderFeatured();
 renderAppointments();
 initMap();
 
-function sendToWhatsApp(event) {
-    // Prevent page reload
-    event.preventDefault();
+function sendToWhatsApp() {
+    // 1. Get the values from the form
+    const name = document.getElementById('visitorName').value;
+    const phone = document.getElementById('visitorPhone').value;
+    const property = document.getElementById('propertyInterest').value;
+    const date = document.getElementById('visitDate').value;
+    const time = document.getElementById('visitTime').value;
 
-    // Grab elements using the exact IDs from the HTML above
-    const name = document.getElementById('appt-name').value;
-    const phone = document.getElementById('appt-phone').value;
-    const property = document.getElementById('appt-property').value;
-    const date = document.getElementById('appt-date').value;
-    const time = document.getElementById('appt-time').value;
+    // Optional: Check if important fields are empty before sending
+    if (!name || !phone) {
+        alert("Please enter your name and phone number.");
+        return;
+    }
 
-    // Your actual target WhatsApp business/personal number (with country code, no +)
-    const whatsappNumber = "919949483794";
+    // 2. The WhatsApp number you want to receive the messages on
+    // Use the country code without '+' (e.g., 91 for India). 
+    // I am using the number from your footer here.
+    const targetNumber = "919291686881";
 
-    // Format the text message smoothly
-    const message = `Hello Varshini Construction,%0A%0A` +
-        `I would like to book a property visit.%0A%0A` +
-        `*Name:* ${encodeURIComponent(name)}%0A` +
-        `*Phone:* ${encodeURIComponent(phone)}%0A` +
-        `*Property:* ${encodeURIComponent(property)}%0A` +
-        `*Date:* ${encodeURIComponent(date)}%0A` +
-        `*Time:* ${encodeURIComponent(time)}`;
+    // 3. Construct the message using URL encoding
+    // %0A represents a line break (Enter key)
+    const message = `Hello! I would like to book a property visit.%0A%0A` +
+        `*Name:* ${name}%0A` +
+        `*Phone:* ${phone}%0A` +
+        `*Property:* ${property}%0A` +
+        `*Date:* ${date}%0A` +
+        `*Time:* ${time}`;
 
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
+    // 4. Create the final WhatsApp API URL
+    const whatsappUrl = `https://wa.me/${targetNumber}?text=${message}`;
 
-    // Open WhatsApp tab
+    // 5. Open WhatsApp in a new tab
     window.open(whatsappUrl, '_blank');
 }

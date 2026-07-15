@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="U_UB9Z_zMFmII0bKgFjkQHtce09o_asexGPas4XgoBc" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JMR Constructions — Find the Property Without Stress</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,38 +149,27 @@
                     <div class="appt-form">
                         <form onsubmit="sendToWhatsApp(event)">
 
-                            <div class="form-field">
+                            <div class="booking-form">
                                 <label>Full name</label>
-                                <input type="text" id="appt-name" placeholder="e.g. Priya Reddy" required>
-                            </div>
+                                <input type="text" id="visitorName" placeholder="e.g. Priya Reddy">
 
-                            <div class="form-field">
                                 <label>Phone number</label>
-                                <input type="text" id="appt-phone" placeholder="+91 90000 00000" required>
-                            </div>
+                                <input type="tel" id="visitorPhone" placeholder="+91 90000 00000">
 
-                            <div class="form-field">
                                 <label>Property</label>
-                                <select id="appt-property" required>
-                                    <option value="Villa in Vijayawada — ₹76 L">Villa in Vijayawada — ₹76 L</option>
+                                <select id="propertyInterest">
+                                    <option>Villa in Vijayawada — ₹76 L</option>
+                                    <option>Apartment in Vijayawada — ₹40 L</option>
                                 </select>
+
+                                <label>Visit date</label>
+                                <input type="date" id="visitDate">
+
+                                <label>Preferred time</label>
+                                <input type="time" id="visitTime">
+
+                                <button onclick="sendToWhatsApp()">Confirm Booking</button>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-field">
-                                    <label>Visit date</label>
-                                    <input type="date" id="appt-date" required>
-                                </div>
-                                <div class="form-field">
-                                    <label>Preferred time</label>
-                                    <input type="time" id="appt-time" required>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="hero-cta" style="width:100%; justify-content:center; box-shadow:none; color:#3a2e05;">
-                                Confirm Booking
-                            </button>
-
                         </form>
 
                         <div class="appt-confirm" id="appt-confirm">✅ <span>Visit request received — our team will call to confirm shortly.</span></div>
@@ -195,7 +183,7 @@
                 </div>
             </div>
         </section>
-         <section class="services-section" id="services">
+        <section class="services-section" id="services">
             <h2 class="section-subtitle">20+ years Legacy of Excellence</h2>
             <p class="section-title">Find your property without any stress</p>
 
@@ -281,14 +269,13 @@
             </div>
 
         </section>
-      
         <section class="section" id="map-section" style="background:#fff;">
             <div class="wrap">
                 <div class="section-head">
                     <div>
                         <span class="eyebrow">Explore locations</span>
                         <h2>Properties on the map</h2>
-                        <p>Pan and zoom to see listings across Vijayawada. Built on OpenStreetMap (no API key needed) — swap in Google Maps JS API if you have a billing key.</p>
+                        <p>Pan and zoom to see listings across Andhra Pradesh &amp; Hyderabad. Built on OpenStreetMap (no API key needed) — swap in Google Maps JS API if you have a billing key.</p>
                     </div>
                 </div>
                 <div id="map"></div>
@@ -366,6 +353,10 @@
                             <p style="font-size:13px;">+919949483794<br>hello@varshiniconstruction.example</p>
                         </div>
                     </div>
+                </div>
+                <div class="wrap footer-bottom">
+                    <span>© 2026 Varshini Construction. Sample project — not a real listing service.</span>
+                    <span>Built for demo purposes</span>
                 </div>
     </footer>
 
