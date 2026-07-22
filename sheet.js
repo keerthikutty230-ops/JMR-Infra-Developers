@@ -1,669 +1,405 @@
-/* ================= CONFIG ================= */
-const PHONE_NUMBER = "+919848386898"; // TODO: replace with real phone
-const WHATSAPP_NUMBER = "919949483794"; // TODO: replace with real WhatsApp number (no + or spaces)
+const properties = [
+  {
+    id: 1,
+    title: 'Apartment in Vijayawada',
+    description: 'Spacious apartment : 1100 sq ft in Devi Nagar, Gadde Vari Polalu Road, Near Madhura Nagar, Vijayawada-520015, Andhra Pradesh',
+    price: '40 Lakhs',
+    image: 'https://i.postimg.cc/LXpcSvG5/devi-nagar-building.jpg',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+  {
+    id: 2,
+    title: 'Premium Apartment',
+    description: 'Well-designed apartment in 1230 sq ft near Devi Nagar,Vinayaka Colony, Gadde Vari Polalu Road, Near Madhura Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '60 Lakhs',
+    image: 'https://i.postimg.cc/CxjtNXvp/VINAYAKA-COLONY-PLANNING.png',
+    type: 'New Projects',
+    city: 'Vijayawada'
+  },
+  {
+    id: 3,
+    title: 'Individual House',
+    description: 'Prime Individual House of 1000 sq ft in Rajarajeswari Peta(new),Amaravati Colony, First Line, Vijayawada-520015, Andhra Pradesh',
+    price: '68 Lakhs',
+    image: 'https://i.postimg.cc/rsjsxQvB/RAJARAJESWARI-INDIVIDUAL.png',
+    type: 'Land',
+    city: 'Vijayawada'
+  },
+  {
+    id: 4,
+    title: 'New Project Launch',
+    description: 'Modern Apartment of 1350 sqft near Ambapuram Panchayathi,Beside S-Convention,Lumina Collection, Vijayawada-520015, Andhra Pradesh.',
+    price: '1.85 lakhs',
+    image: 'https://i.postimg.cc/T1t2phDQ/AMABAPURAM-PANCHAYATHI.png',
+    type: 'New Projects',
+    city: 'Vijayawada'
+  },
+  {
+    id: 5,
+    title: 'Apartment',
+    description: 'Perfect apartment of 3BHK-sold near Nandamuri Nagar,Thota Vari Street,Road Number-9, Vijayawada-520015, Andhra Pradesh .',
+    price: '65 Lakhs',
+    image: 'https://i.postimg.cc/C5xBv3Cr/THOTAVARI-APARTMENT.png',
+    type: 'Plot',
+    city: 'Vijayawada'
+  },
+  {
+    id: 6,
+    title: 'Luxury Apartment',
+    description: 'Elevated living apartment of 2BHK-sold near Sidartha Nagar,Nandamuri Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '80 lakhs',
+    image: 'https://i.postimg.cc/2jWhtYf9/SIDARTHA-STREET.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+  // Add more property objects below this line and before the closing array bracket.
+  // Example:
+  {
+    id: 7,
+    title: 'New Modern Apartment',
+    description: 'Brand new apartment of 3BHK-sold near Uda Colony,Payakapuram,Singh Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '60 lakhs',
+    image: 'https://i.postimg.cc/hjzTcWQt/UDA-COLONY.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
 
-/* ================= CITY DATA ================= */
-const CITIES = [{
-        name: "Vijayawada",
-        lat: 16.5062,
-        lng: 80.6480
-    },
-    {
-        name: "Guntur",
-        lat: 16.3067,
-        lng: 80.4365
-    },
+  {
+    id: 8,
+    title: 'Apartment',
+    description: 'Apartment 2BHK-sold near Piple Road, Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '60 lakhs',
+    image: 'https://i.postimg.cc/nczjJt88/PIPLE-ROAD.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+   {
+    id: 9,
+    title: 'Individual House',
+    description: 'Modern Individual House near Nandamuri Nagar,Thota Vari Street,Road Number-12, Vijayawada-520015, Andhra Pradesh.',
+    price: '80 lakhs',
+    image: 'https://i.postimg.cc/6q67qkyP/THOTA-ROAD-NO-12.png',
+    type: 'Buy',
+    city: 'Vijayawada'
+  },
+   {
+    id: 10,
+    title: 'Apartment',
+    description: 'Apartment 3BHK-sold near Bhavanipuram, Swathi Road, Vijayawada-520015, Andhra Pradesh.',
+    price: '95 lakhs',
+    image: 'https://i.postimg.cc/MXkhdSVj/BHAVANIPURAM.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+   {
+    id: 11,
+    title: 'Apartment',
+    description: 'Apartment 2BHK-sold near Ramakrishnapuram,Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '78 lakhs',
+    image: 'https://i.postimg.cc/kXqr6nM4/RAMAKRISHNAPURAM.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+   {
+    id: 12,
+    title: 'Modern Apartment',
+    description: 'Modern living space Apartment 3BHK-sold near Currency Nagar,Back Side Ayush Hospitals, Vijayawada-520015, Andhra Pradesh.',
+    price: '65 lakhs',
+    image: 'https://i.postimg.cc/PqL0sJyF/CURRENCY-NAGAR.png',
+    type: 'Apartment',
+    city: 'Vijayawada'
+  },
+  {
+    id: 13,
+    title: 'Individual House',
+    description: 'Modern Individual House near Prashanti Nagar,Road No- 1, Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh.',
+    price: '88 lakhs',
+    image: 'https://i.postimg.cc/xTtZXMFB/PRASHANTHI-NAGAR.png',
+    type: 'Buy',
+    city: 'Vijayawada'
+  },
+  {
+    id: 14,
+    title: 'Land',
+    description: '4 acres near Kancherla, Non-layout, Near nandigama, Vijayawada-520015, Andhra Pradesh.',
+    price: '6,500 sq ft',
+    image: 'https://i.postimg.cc/g28TbyM9/KANCHARLA.png',
+    type: 'New Projects',
+    city: 'Vijayawada'
+  },
+  {
+    id: 15,
+    title: 'Land',
+    description: '5 acres,G-Konduru, Vijayawada-520015, Andhra Pradesh.',
+    price: '12,000 sq ft',
+    image: 'https://i.postimg.cc/MK4CSpqh/G-KONDURU.png',
+    type: 'New Projects',
+    city: 'Vijayawada'
+  },
 
 ];
-const CITY_ALIASES = {
-    "bezawada": "Vijayawada",
-    "vja": "Vijayawada",
-    "bezwada": "Vijayawada"
-};
 
-/* ================= PROPERTY DATA ================= */
-let _id = 1;
+let activeCategory = 'All';
+let searchFilters = { location: '', budget: '', type: '' };
 
-function P(city, type, price, unitPrice, unitLabel, size, isNew, image, fullAddress) {
-    const c = CITIES.find(c => c.name === city);
-    return {
-        id: _id++,
-        city,
-        price,
-        type,
-        unitPrice,
-        unitLabel,
-        size,
-        lat: c.lat + (Math.random() - 0.5) * 0.05,
-        lng: c.lng + (Math.random() - 0.5) * 0.05,
-        isNew: !!isNew,
-        image: image || "https://placehold.co/600x400?text=Property",
-        address: fullAddress || `${city}, Andhra Pradesh` // Falls back to default if no specific address is provided
-    };
-}
-const PROPERTIES = [
-    P("Vijayawada", "Apartment", 4000000, 1100, "", "1100 sq.ft", true, "https://i.postimg.cc/LXpcSvG5/devi-nagar-building.jpg", "Devi Nagar, Gadde Vari Polalu Road, Near Madhura Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "New Projects", 6000000, 1230, "", "Sold", true, "https://i.postimg.cc/CxjtNXvp/VINAYAKA-COLONY-PLANNING.png", "Devi Nagar,Vinayaka Colony, Gadde Vari Polalu Road, Near Madhura Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "New Projects", 6800000, 1000, "", "1000 sq.ft- Independent", true, "https://i.postimg.cc/rsjsxQvB/RAJARAJESWARI-INDIVIDUAL.png", "Rajarajeswari Peta(new),Amaravati Colony, First Line, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "New Projects", 18500000, 1100, "", "1350 sq.ft", true, "https://i.postimg.cc/T1t2phDQ/AMABAPURAM-PANCHAYATHI.png", "Ambapuram Panchayathi,Beside S-Convention,Lumina Collection, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 6500000, 1100, "", "Sold - 3BHK", true, "https://i.postimg.cc/C5xBv3Cr/THOTAVARI-APARTMENT.png", "Nandamuri Nagar,Thota Vari Street,Road Number-9, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 8000000, 1100, "", "Sold -2BHK", true, "https://i.postimg.cc/2jWhtYf9/SIDARTHA-STREET.png", "Sidartha Nagar,Nandamuri Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 6000000, 1100, "", "Sold - 3BHK", true, "https://i.postimg.cc/hjzTcWQt/UDA-COLONY.png", "Uda Colony,Payakapuram,Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 7000000, 1100, "", "Sold- 2BHK", true, "https://i.postimg.cc/nczjJt88/PIPLE-ROAD.png", "Piple Road, Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Buy", 8000000, 1100, "", "Sold- Independent", true, "https://i.postimg.cc/6q67qkyP/THOTA-ROAD-NO-12.png", "Nandamuri Nagar,Thota Vari Street,Road Number-12, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 9500000, 1100, "", "Sold- 3BHK", true, "https://i.postimg.cc/MXkhdSVj/BHAVANIPURAM.png", "Bhavanipuram, Swathi Road, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 7800000, 1100, "", "Sold- 2BHK", true, "https://i.postimg.cc/kXqr6nM4/RAMAKRISHNAPURAM.png", "Ramakrishnapuram,Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Apartment", 6400000, 1100, "", "Sold- 3BHK", true, "https://i.postimg.cc/PqL0sJyF/CURRENCY-NAGAR.png", "Currency Nagar,Back Side Ayush Hospitals, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Buy", 8800000, 1100, "", "Sold-Individual", true, "https://i.postimg.cc/xTtZXMFB/PRASHANTHI-NAGAR.png", "Prashanthi Nagar,Road No-1,Ajith Singh Nagar, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Land", 6500, 1100, "", "4 acres", true, "https://i.postimg.cc/g28TbyM9/KANCHARLA.png", "Kancherla,Non-layout,Near Nandigama, Vijayawada-520015, Andhra Pradesh"),
-    P("Vijayawada", "Land", 12000, 1100, "", "5 acres", true, "https://i.postimg.cc/MK4CSpqh/G-KONDURU.png", "G-konduru,Vijayawada-520015, Andhra Pradesh")
-];
+const propertyGrid = document.getElementById('propertyGrid');
+const categoryButtons = document.querySelectorAll('.category-card');
+const searchForm = document.getElementById('searchForm');
+const appointmentForm = document.getElementById('appointmentForm');
+const appointmentSubmitButton = document.getElementById('appointmentSubmitBtn');
+const whatsappNumber = '919949483794';
+const chatToggle = document.getElementById('chatToggle');
+const chatPanel = document.getElementById('chatPanel');
+const chatClose = document.getElementById('chatClose');
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatBody = document.getElementById('chatBody');
+const allPropertiesPage = document.getElementById('allPropertiesPage');
+const allPropertyGrid = document.getElementById('allPropertyGrid');
+const viewAllBtn = document.getElementById('viewAllBtn');
+const navAllPropertiesLink = document.getElementById('navAllPropertiesLink');
+const backHomeBtn = document.getElementById('backHomeBtn');
+const mainContent = document.getElementById('home');
 
-const TYPE_ICON = {
-    Villa: "🏡",
-    Plot: "📐",
-    Land: "🌾",
-    Apartment: "🏢"
-};
-let listingCategory = "All";
-let listingVisible = 9;
-let featuredList = [];
+function openWhatsApp(message = '') {
+  const url = new URL(`https://wa.me/${whatsappNumber}`);
+  if (message) {
+    url.searchParams.set('text', message);
+  }
 
-/* ================= HELPERS ================= */
-function formatINR(n) {
-    if (n >= 10000000) return "₹" + (n / 10000000).toFixed(n % 10000000 === 0 ? 0 : 2) + " Cr";
-    if (n >= 100000) return "₹" + (n / 100000).toFixed(n % 100000 === 0 ? 0 : 1) + " L";
-    return "₹" + Math.round(n).toLocaleString('en-IN');
+  const fullUrl = url.toString();
+  const newWindow = window.open(fullUrl, '_blank', 'noopener,noreferrer');
+  if (!newWindow) {
+    window.location.href = fullUrl;
+  }
 }
 
-function formatFullINR(n) {
-    return "₹" + Math.round(n).toLocaleString('en-IN');
+function parsePriceToRupees(priceText) {
+  if (!priceText) return 0;
+
+  const normalized = String(priceText).toLowerCase().replace(/,/g, '').trim();
+
+  if (normalized.includes('crore') || normalized.includes('crores')) {
+    const amount = Number.parseFloat(normalized.replace(/[^\d.]/g, ''));
+    return Number.isFinite(amount) ? amount * 10000000 : 0;
+  }
+
+  if (normalized.includes('lakh') || normalized.includes('lakhs')) {
+    const amount = Number.parseFloat(normalized.replace(/[^\d.]/g, ''));
+    return Number.isFinite(amount) ? amount * 100000 : 0;
+  }
+
+  const digitsOnly = Number.parseFloat(normalized.replace(/[^\d.]/g, ''));
+  return Number.isFinite(digitsOnly) ? digitsOnly : 0;
 }
 
-function openWhatsApp(msg) {
-    window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
+function normalizePropertyType(type) {
+  return String(type || '').toLowerCase().replace(/\s+/g, '');
 }
 
-function callNow() {
-    window.location.href = "tel:" + PHONE_NUMBER;
-}
+function matchesCategoryFilter(property, category) {
+  const normalizedCategory = normalizePropertyType(category);
+  const normalizedType = normalizePropertyType(property.type);
 
-function scrollToMap() {
-    goHome();
-    setTimeout(() => document.getElementById('map-section').scrollIntoView({
-        behavior: 'smooth'
-    }), 60);
-}
-
-function goHome() {
-    document.getElementById('home-view').classList.remove('hidden');
-    document.getElementById('listing-view').classList.add('hidden');
-    document.getElementById('mobile-menu').classList.remove('open');
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-    setTimeout(() => {
-        if (map) {
-            map.invalidateSize();
-        }
-    }, 200);
-}
-
-function goHomeScroll(id) {
-    goHome();
-    setTimeout(() => document.getElementById(id).scrollIntoView({
-        behavior: 'smooth'
-    }), 60);
-}
-
-function propVisual(type, isNew) {
-    const grads = {
-        Villa: ["#123A5E", "#0A66C2"],
-        Plot: ["#5C4A12", "#D4AF37"],
-        Land: ["#1F4A2E", "#3E8A55"],
-        Apartment: ["#2B1A4A", "#5B3FA0"]
-    };
-    const g = grads[type] || grads.Villa;
-    return `<svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="g${type}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${g[0]}"/><stop offset="100%" stop-color="${g[1]}"/>
-    </linearGradient></defs>
-    <rect width="300" height="190" fill="url(#g${type})"/>
-    <g opacity="0.5">
-      <rect x="30" y="90" width="60" height="70" fill="#ffffff22"/>
-      <rect x="100" y="60" width="50" height="100" fill="#ffffff33"/>
-      <rect x="160" y="100" width="70" height="60" fill="#ffffff22"/>
-      <rect x="240" y="75" width="35" height="85" fill="#ffffff2b"/>
-    </g>
-    <text x="150" y="180" text-anchor="middle" font-family="Poppins" font-size="34" fill="#ffffff" opacity="0.9">${TYPE_ICON[type]||"🏠"}</text>
-  </svg>`;
-}
-
-/* ================= DROPDOWNS ================= */
-function populateCityDropdowns() {
-    [document.getElementById('q-city'), document.getElementById('l-city')].forEach(sel => {
-        CITIES.forEach(c => {
-            const o = document.createElement('option');
-            o.value = c.name;
-            o.textContent = c.name;
-            sel.appendChild(o);
-        });
-    });
-    const apSel = document.getElementById('appt-property');
-    PROPERTIES.forEach(p => {
-        const o = document.createElement('option');
-        o.value = p.id;
-        o.textContent = `${p.type} in ${p.city} — ${formatINR(p.price)}`;
-        apSel.appendChild(o);
-    });
-}
-
-/* ================= HOME FEATURED ================= */
-function renderFeatured() {
-    featuredList = PROPERTIES.filter(p => p.isNew).concat(PROPERTIES.slice(0, 9)).slice(0, 9);
-    const grid = document.getElementById('featured-grid');
-    grid.innerHTML = featuredList.map(p => propCard(p)).join('');
-    observeCards();
-}
-
-function propCard(p) {
-    return `
-    <div class="property-card">
-        <div class="property-badge">${p.isNew ? 'New' : ''}</div>
-        <div class="property-type">${p.type}</div>
-        
-        <div class="property-image-container">
-            <img src="${p.image}" alt="${p.type}" class="property-card-img">
-        </div>
-        
-        <h3>${p.city}</h3>
-        <div class="prop-loc" style="font-size: 12px; line-height: 1.4; min-height: 38px;">📍 ${p.address}</div>
-        
-        <div class="prop-split">
-            <div class="prop-size">${p.size}</div>
-            <div class="prop-price">₹${p.price.toLocaleString('en-IN')}${p.unitLabel}</div>
-        </div>
-        
-        <div class="prop-action">
-            <button class="btn-call" onclick="window.open('tel:+919848386898')">📞 Call Now</button>
-            <button class="btn-wa" onclick="window.open('https://wa.me/919949483794')">💬 WhatsApp</button>
-        </div>
-    </div>
-    `;
-}
-
-function waEnquire(id) {
-    const p = PROPERTIES.find(x => x.id === id);
-    openWhatsApp(`Hi, I'm interested in this property: ${p.type} in ${p.city}, ${p.size}, ${formatINR(p.price)} total (${formatFullINR(p.unitPrice)}${p.unitLabel}). Please share more details.`);
-}
-
-/* ================= CATEGORY / LISTING VIEW ================= */
-function categoryMatch(p, cat) {
-    if (cat === 'All') return true;
-    if (cat === 'Buy') return p.type === 'Villa' || p.type === 'Plot';
-    if (cat === 'Apartment') return p.type === 'Apartment';
-    if (cat === 'Plot') return p.type === 'Plot';
-    if (cat === 'Land') return p.type === 'Land';
-    if (cat === 'New Projects') return p.isNew === true;
+  if (!normalizedCategory || normalizedCategory === 'all') {
     return true;
-}
-const CATEGORY_LABELS = {
-    All: "All Properties",
-    Buy: "Buy — Villas & Plots",
-    Apartment: "Apartment Properties",
-    "New Projects": "New Projects",
-    Plot: "Residential Plots",
-    Land: "Land & Agricultural Plots"
-};
-const CATEGORY_SUB = {
-    All: "Every listing across Andhra Pradesh & Hyderabad",
-    Buy: "Ready villas and residential plots to call home",
-    Apartment: "Living spaces, Apartment, Group Houses",
-    "New Projects": "Freshly launched developments",
-    Plot: "Compact residential plots, ready to build",
-    Land: "Open land and agricultural parcels"
-};
+  }
 
-let listingFilters = {
-    city: "",
-    budget: "",
-    type: ""
-};
+  if (normalizedCategory === 'buy') {
+    return normalizedType === 'buy' || normalizedType === 'plot';
+  }
 
-function showCategory(cat) {
-    listingCategory = cat;
-    listingVisible = 9;
-    listingFilters = {
-        city: "",
-        budget: "",
-        type: ""
-    };
-    document.getElementById('l-city').value = "";
-    document.getElementById('l-budget').value = "";
-    document.getElementById('l-type').value = "";
-    document.getElementById('home-view').classList.add('hidden');
-    document.getElementById('listing-view').classList.remove('hidden');
-    document.getElementById('listing-view').classList.add('fade-enter');
-    document.getElementById('listing-heading').textContent = CATEGORY_LABELS[cat];
-    document.getElementById('listing-sub').textContent = CATEGORY_SUB[cat];
-    document.getElementById('mobile-menu').classList.remove('open');
-    renderPills();
-    renderListingGrid();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+  if (normalizedCategory === 'newprojects') {
+    return normalizedType === 'newprojects' || normalizedType === 'newproject';
+  }
+
+  return normalizedType === normalizedCategory;
 }
 
-function renderPills() {
-    const cats = ["All", "Buy", "Apartment", "New Projects", "Plot", "Land"];
-    document.getElementById('listing-pills').innerHTML = cats.map(c =>
-        `<button class="pill ${c===listingCategory?'active':''}" onclick="showCategory('${c}')">${c}</button>`
-    ).join('');
+function getFilteredProperties() {
+  return properties.filter((property) => {
+    const categoryMatches = matchesCategoryFilter(property, activeCategory);
+    const locationMatches = !searchFilters.location || property.city === searchFilters.location;
+    const typeMatches = !searchFilters.type || normalizePropertyType(property.type) === normalizePropertyType(searchFilters.type) || (searchFilters.type === 'Buy' && (property.type === 'Buy' || property.type === 'Plot'));
+
+    const budgetMatches = (() => {
+      if (!searchFilters.budget) return true;
+      const [min, max] = searchFilters.budget.split('-').map(Number);
+      const priceValue = parsePriceToRupees(property.price);
+      return priceValue >= min && priceValue <= max;
+    })();
+
+    return categoryMatches && locationMatches && typeMatches && budgetMatches;
+  });
 }
 
-function applyListingSearch() {
-    listingFilters.city = document.getElementById('l-city').value;
-    listingFilters.budget = document.getElementById('l-budget').value;
-    listingFilters.type = document.getElementById('l-type').value;
-    listingVisible = 9;
-    renderListingGrid();
-}
+function renderProperties() {
+  const filtered = getFilteredProperties();
+  if (!filtered.length) {
+    propertyGrid.innerHTML = '<div class="property-card"><h3>No properties found</h3><p>Try another category or search filter.</p></div>';
+    return;
+  }
 
-function applyHomeSearch() {
-    const city = document.getElementById('q-city').value;
-    const budget = document.getElementById('q-budget').value;
-    const type = document.getElementById('q-type').value;
-    showCategory('All');
-    document.getElementById('l-city').value = city;
-    document.getElementById('l-budget').value = budget;
-    document.getElementById('l-type').value = type;
-    listingFilters = {
-        city,
-        budget,
-        type
-    };
-    renderListingGrid();
-}
-
-function getListingFiltered() {
-    return PROPERTIES.filter(p => {
-        if (!categoryMatch(p, listingCategory)) return false;
-        if (listingFilters.city && p.city !== listingFilters.city) return false;
-        if (listingFilters.type && p.type !== listingFilters.type) return false;
-        if (listingFilters.budget) {
-            const [min, max] = listingFilters.budget.split('-').map(Number);
-            if (p.price < min || p.price > max) return false;
-        }
-        return true;
-    });
-}
-
-function renderListingGrid() {
-    const grid = document.getElementById('listing-grid');
-    const filtered = getListingFiltered();
-    if (filtered.length === 0) {
-        grid.innerHTML = `<div class="empty-state">No properties currently match this search. Try a different city, budget or type — or ask our chatbot, which covers every city we operate in.</div>`;
-        document.getElementById('listing-load-more').style.display = 'none';
-        return;
-    }
-    grid.innerHTML = filtered.slice(0, listingVisible).map(p => propCard(p)).join('');
-    document.getElementById('listing-load-more').style.display = listingVisible >= filtered.length ? 'none' : 'inline-block';
-    observeCards();
-}
-
-function loadMoreListing() {
-    listingVisible += 9;
-    renderListingGrid();
-}
-
-/* ================= PROPERTY MODAL ================= */
-function openModal(id) {
-    const p = PROPERTIES.find(x => x.id === id);
-    const box = document.getElementById('modal-box');
-    box.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-img">${propVisual(p.type, p.isNew)}</div>
-    <div class="modal-content">
-      <h3>${p.type} in ${p.city}</h3>
-      <div class="modal-tags">
-        <span class="tag">${p.type}</span>
-        <span class="tag">${p.city}</span>
-        ${p.isNew ? '<span class="tag">New Project</span>' : ''}
+  propertyGrid.innerHTML = filtered.map((property) => `
+    <article class="property-card">
+      <img src="${property.image}" alt="${property.title}" />
+      <h3>${property.title}</h3>
+      <p class="property-meta">${property.description}</p>
+      <div class="property-price">${property.price}</div>
+      <div class="property-actions">
+        <a class="call-btn" href="tel:+919949483794">📞 Call Now</a>
+        <a class="wa-btn" href="https://wa.me/919949483794?text=Hello%20I%20am%20interested%20in%20${encodeURIComponent(property.title)}" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
       </div>
-      <div class="modal-price">${formatFullINR(p.unitPrice)} <span style="font-size:14px; color:var(--ink-soft); font-weight:400;">${p.unitLabel}</span></div>
-      <div style="font-size:13.5px; color:var(--ink-soft);">Total price: <b style="color:var(--ink);">${formatINR(p.price)}</b> · Size: <b style="color:var(--ink);">${p.size}</b></div>
-      <p style="font-size:13px; color:var(--ink-soft); margin-top:14px; font-style:italic;">To know more details, contact us.</p>
-      <div class="modal-actions">
-        <button class="btn-call" style="flex:1;" onclick="callNow()">📞 Call Now</button>
-        <button class="btn-wa" style="flex:1;" onclick="waEnquire(${p.id})">💬 WhatsApp Now</button>
+    </article>
+  `).join('');
+}
+
+function renderAllPropertiesPage() {
+  allPropertyGrid.innerHTML = properties.map((property) => `
+    <article class="property-card">
+      <img src="${property.image}" alt="${property.title}" />
+      <h3>${property.title}</h3>
+      <p class="property-meta">${property.description}</p>
+      <div class="property-details">
+        <p><strong>Location:</strong> ${property.city}</p>
+        <p><strong>Type:</strong> ${property.type}</p>
+        <p><strong>Price:</strong> ${property.price}</p>
       </div>
-      <div style="margin-top:12px;">
-        <button class="btn-outline" style="width:100%;" onclick="closeModal(); document.getElementById('appt-property').value=${p.id}; goHomeScroll('appointment');">Book a Visit for This Property</button>
+      <div class="property-actions">
+        <a class="call-btn" href="tel:+919949483794">📞 Call Now</a>
+        <a class="wa-btn" href="https://wa.me/919949483794?text=Hello%20I%20am%20interested%20in%20${encodeURIComponent(property.title)}" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
       </div>
-    </div>`;
-    document.getElementById('modal-overlay').classList.add('open');
+    </article>
+  `).join('');
 }
 
-function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('open');
+categoryButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    activeCategory = button.dataset.category;
+    categoryButtons.forEach((item) => item.classList.toggle('active', item === button));
+    document.getElementById('properties').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    renderProperties();
+  });
+});
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  searchFilters = {
+    location: document.getElementById('locationSelect').value,
+    budget: document.getElementById('budgetSelect').value,
+    type: document.getElementById('typeSelect').value
+  };
+  document.getElementById('properties').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  renderProperties();
+});
+
+viewAllBtn.addEventListener('click', () => {
+  showAllPropertiesPage();
+});
+
+navAllPropertiesLink.addEventListener('click', (event) => {
+  event.preventDefault();
+  showAllPropertiesPage();
+});
+
+backHomeBtn.addEventListener('click', () => {
+  hideAllPropertiesPage();
+});
+
+let isAppointmentSubmitting = false;
+
+function handleAppointmentSubmit() {
+  if (isAppointmentSubmitting) {
+    return;
+  }
+
+  isAppointmentSubmitting = true;
+  if (appointmentSubmitButton) {
+    appointmentSubmitButton.disabled = true;
+    appointmentSubmitButton.textContent = 'Opening WhatsApp...';
+  }
+
+  const fullName = document.getElementById('fullName').value.trim();
+  const phoneNumber = document.getElementById('phoneNumber').value.trim();
+  const propertyVisit = document.getElementById('propertyVisit').value;
+  const visitDate = document.getElementById('visitDate').value;
+  const visitTime = document.getElementById('visitTime').value;
+  const message = `Hello JMR Infra Developers. I would like to book a property visit. Name: ${fullName}. Phone: ${phoneNumber}. Property: ${propertyVisit}. Date: ${visitDate}. Time: ${visitTime}.`;
+  openWhatsApp(message);
+  appointmentForm.reset();
+
+  const confirmation = document.createElement('div');
+  confirmation.className = 'property-card';
+  confirmation.innerHTML = '<h3>Booking request ready</h3><p>WhatsApp opened with your booking details. Click Send in the chat to send it to the admin.</p>';
+  appointmentForm.replaceWith(confirmation);
 }
 
-/* ================= AUTH MODAL ================= */
-function openAuth(mode) {
-    switchAuth(mode);
-    document.getElementById('auth-overlay').classList.add('open');
-    document.getElementById('mobile-menu').classList.remove('open');
+appointmentForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+});
+
+if (appointmentSubmitButton) {
+  appointmentSubmitButton.addEventListener('click', handleAppointmentSubmit);
 }
 
-function closeAuth() {
-    document.getElementById('auth-overlay').classList.remove('open');
+function appendChatBubble(text, type) {
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble ${type}`;
+  bubble.textContent = text;
+  chatBody.appendChild(bubble);
 }
 
-function switchAuth(mode) {
-    document.getElementById('tab-login').classList.toggle('active', mode === 'login');
-    document.getElementById('tab-register').classList.toggle('active', mode === 'register');
-    document.getElementById('auth-title').textContent = mode === 'login' ? 'Login' : 'Create your account';
-    document.getElementById('auth-name-field').style.display = mode === 'register' ? 'block' : 'none';
+function showAllPropertiesPage() {
+  mainContent.classList.add('hidden');
+  allPropertiesPage.classList.remove('hidden');
+  renderAllPropertiesPage();
+  allPropertiesPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function submitAuth() {
-    closeAuth();
-    alert("This is a UI demo — hook this up to a real authentication backend (e.g. your own API + database) to enable real accounts.");
-}
-/* ================= APPOINTMENTS ================= */
-let appointments = [];
-
-function bookAppointment() {
-    const name = document.getElementById('appt-name').value.trim();
-    const phone = document.getElementById('appt-phone').value.trim();
-    const propId = Number(document.getElementById('appt-property').value);
-    const date = document.getElementById('appt-date').value;
-    const time = document.getElementById('appt-time').value;
-    const p = PROPERTIES.find(x => x.id === propId);
-    if (!name || !phone || !date || !time) {
-        alert("Please fill in your name, phone, date and time.");
-        return;
-    }
-    appointments.unshift({
-        name,
-        phone,
-        date,
-        time,
-        p
-    });
-    renderAppointments();
-    const confirm = document.getElementById('appt-confirm');
-    confirm.classList.add('show');
-    setTimeout(() => confirm.classList.remove('show'), 4000);
-    openWhatsApp(`Site visit request:\nName: ${name}\nPhone: ${phone}\nProperty: ${p.type} in ${p.city} (${formatINR(p.price)})\nDate: ${date} at ${time}`);
-    document.getElementById('appt-name').value = '';
-    document.getElementById('appt-phone').value = '';
-    document.getElementById('appt-date').value = '';
-    document.getElementById('appt-time').value = '';
+function hideAllPropertiesPage() {
+  allPropertiesPage.classList.add('hidden');
+  mainContent.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function renderAppointments() {
-    const list = document.getElementById('appt-list');
-    if (appointments.length === 0) {
-        list.innerHTML = '<div class="appt-empty">No visits booked yet this session.</div>';
-        return;
-    }
-    list.innerHTML = appointments.map(a => `
-    <div class="appt-item">
-      <b>${a.p.type} in ${a.p.city}</b>
-      ${a.name} · ${a.phone}<br>
-      Visit requested for <strong>${a.date} at ${a.time}</strong>
-    </div>`).join('');
+function getBotReply(input) {
+  const message = input.toLowerCase();
+  if (['hi', 'hello', 'hey'].some((word) => message.includes(word))) {
+    return 'Hello! I am JMR Infra Developers assistant. I can help you explore premium apartments, land, plots, and new projects across Vijayawada.';
+  }
+  if (message.includes('appointment')) {
+    return 'You can book a property visit directly from the appointment section. We will confirm your slot and send the details on WhatsApp.';
+  }
+  if (message.includes('apartment')) {
+    return 'We have premium apartments with modern amenities and excellent connectivity. You can view them in the featured properties section.';
+  }
+  if (message.includes('land')) {
+    return 'Our land listings include clear title plots with strong long-term investment value. We can help you shortlist the right location.';
+  }
+  if (message.includes('new project') || message.includes('project')) {
+    return 'We have upcoming new projects with contemporary planning, good access, and premium construction standards.';
+  }
+  if (message.includes('budget')) {
+    return 'We can help you find homes in different budget ranges, from affordable options to premium villas and penthouses.';
+  }
+  if (message.includes('thanks')) {
+    return 'Thank you for visiting! For more details, explore our website or contact us on WhatsApp.';
+  }
+  return 'Sorry, I don�t have that data. Please contact us on WhatsApp for quick assistance.';
 }
 
-/* ================= MAP ================= */
-let map;
+chatToggle.addEventListener('click', () => chatPanel.classList.toggle('open'));
+chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
 
-function initMap() {
-    map = L.map('map').setView([16.5, 80.2], 6.3);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
-        maxZoom: 17
-    }).addTo(map);
-    PROPERTIES.forEach(p => {
-        const marker = L.marker([p.lat, p.lng]).addTo(map);
-        marker.bindPopup(`<b>${p.type} in ${p.city}</b><br>${formatFullINR(p.unitPrice)}${p.unitLabel} · ${p.size}<br>${formatINR(p.price)} total`);
-    });
-}
+chatForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const value = chatInput.value.trim();
+  if (!value) return;
+  appendChatBubble(value, 'user');
+  appendChatBubble(getBotReply(value), 'bot');
+  chatInput.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+});
 
-/* ================= CHATBOT ================= */
-function toggleChat() {
-    const panel = document.getElementById('chat-panel');
-    panel.classList.toggle('open');
-    if (panel.classList.contains('open') && document.getElementById('chat-body').children.length === 0) {
-        botSay("Hi! I'm the Varshini Assistant. I cover every city we operate in across Andhra Pradesh and Hyderabad. Ask me things like \"plots in Hyderabad\" or \"land under 30 lakhs in Guntur\".");
-    }
-}
-
-function botSay(text) {
-    const body = document.getElementById('chat-body');
-    const div = document.createElement('div');
-    div.className = 'msg bot';
-    div.textContent = text;
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
-}
-
-function userSay(text) {
-    const body = document.getElementById('chat-body');
-    const div = document.createElement('div');
-    div.className = 'msg user';
-    div.textContent = text;
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
-}
-
-function showTyping() {
-    const body = document.getElementById('chat-body');
-    const div = document.createElement('div');
-    div.className = 'msg bot';
-    div.id = 'typing-indicator';
-    div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-    body.appendChild(div);
-    body.scrollTop = body.scrollHeight;
-    return div;
-}
-
-function botShowResults(results) {
-    const body = document.getElementById('chat-body');
-    const wrap = document.createElement('div');
-    wrap.className = 'msg bot';
-    wrap.style.padding = '10px';
-    wrap.innerHTML = `<div style="margin-bottom:6px;">Found ${results.length} matching ${results.length===1?'property':'properties'}:</div>` +
-        results.slice(0, 4).map(p => `
-      <div class="msg-card">
-        <b>${p.type} in ${p.city}</b>
-        <div>${p.size} ${p.isNew ? '· New Project' : ''}</div>
-        <div class="p">${formatFullINR(p.unitPrice)}${p.unitLabel} · ${formatINR(p.price)} total</div>
-        <div class="msg-card-actions">
-          <button style="background:var(--bg); color:var(--primary-dark);" onclick="openModal(${p.id})">Details</button>
-          <button style="background:var(--wa); color:#fff;" onclick="waEnquire(${p.id})">WhatsApp</button>
-        </div>
-      </div>`).join('');
-    body.appendChild(wrap);
-    body.scrollTop = body.scrollHeight;
-}
-
-function resolveCity(text) {
-    const t = text.toLowerCase();
-    for (const alias in CITY_ALIASES) {
-        if (t.includes(alias)) return CITY_ALIASES[alias];
-    }
-    return CITIES.find(c => t.includes(c.name.toLowerCase()));
-}
-
-function parseBudgetFromText(text) {
-    const t = text.toLowerCase();
-    let m = t.match(/(under|below|less than)\s*₹?\s*([\d.]+)\s*(lakh|lakhs|l|crore|cr)\b/);
-    if (m) {
-        const v = parseFloat(m[2]) * (m[3][0] === 'c' ? 10000000 : 100000);
-        return {
-            min: 0,
-            max: v
-        };
-    }
-    m = t.match(/(above|over|more than)\s*₹?\s*([\d.]+)\s*(lakh|lakhs|l|crore|cr)\b/);
-    if (m) {
-        const v = parseFloat(m[2]) * (m[3][0] === 'c' ? 10000000 : 100000);
-        return {
-            min: v,
-            max: 999999999
-        };
-    }
-    m = t.match(/([\d.]+)\s*(?:lakh|lakhs|l|crore|cr)?\s*-\s*([\d.]+)\s*(lakh|lakhs|l|crore|cr)\b/);
-    if (m) {
-        const mult = m[3][0] === 'c' ? 10000000 : 100000;
-        return {
-            min: parseFloat(m[1]) * mult,
-            max: parseFloat(m[2]) * mult
-        };
-    }
-    m = t.match(/([\d.]+)\s*(lakh|lakhs|l|crore|cr)\b/);
-    if (m) {
-        const v = parseFloat(m[1]) * (m[2][0] === 'c' ? 10000000 : 100000);
-        return {
-            min: 0,
-            max: v
-        };
-    }
-    return null;
-}
-
-function detectType(text) {
-    const t = text.toLowerCase();
-    if (t.includes("commercial") || t.includes("shop") || t.includes("office")) return "Commercial";
-    if (t.includes("villa") || t.includes("house") || t.includes("home")) return "Villa";
-    if (t.includes("plot")) return "Plot";
-    if (t.includes("land") || t.includes("agri") || t.includes("acre")) return "Land";
-    return null;
-}
-
-function handleUserQuery(text) {
-    const typingEl = showTyping();
-    setTimeout(() => {
-        typingEl.remove();
-        const t = text.toLowerCase();
-        const city = resolveCity(text);
-        const type = detectType(text);
-        const budget = parseBudgetFromText(t);
-
-        if (!city && !type && !budget) {
-            if (/hi|hello|hey/.test(t)) {
-                botSay("Hello! Tell me a city, a property type, or a budget — e.g. \"villas in Hyderabad under 1 crore\" — and I'll pull up matches.");
-                return;
-            }
-            if (t.includes("emi") || t.includes("loan")) {
-                botSay("You can use the EMI calculator on the home page — taking you there now.");
-                goHomeScroll('emi');
-                return;
-            }
-            if (t.includes("visit") || t.includes("appointment") || t.includes("book")) {
-                botSay("Sure — here's the booking form.");
-                goHomeScroll('appointment');
-                return;
-            }
-            botSay("I can search by city (any city across Vijayawada), property type (villa/plot/land/Apartment), or budget. Try \"land in Vijayawada under 20 lakhs\".");
-            return;
-        }
-
-        if (city && !CITIES.find(c => c.name === city.name)) {
-            botSay(`We don't have listings in that area yet. I can pass your enquiry to our team on WhatsApp instead.`);
-            return;
-        }
-
-        let results = PROPERTIES.filter(p => {
-            if (city && p.city !== city.name) return false;
-            if (type && p.type !== type) return false;
-            if (budget && (p.price < budget.min || p.price > budget.max)) return false;
-            return true;
-        });
-
-        let intro = "";
-        if (city && results.length === 0) {
-            intro = `Currently, we don't have ${type ? type.toLowerCase()+' ' : ''}properties available in ${city.name}${budget ? ' within that budget' : ''}. `;
-            botSay(intro + "Want me to notify you on WhatsApp when new listings come up there, or show nearby cities instead?");
-            return;
-        }
-        if (city) intro += `Here's what's available in ${city.name}`;
-        else intro += "Here's what I found";
-        if (type) intro += ` (${type})`;
-        if (budget) intro += `, within your budget`;
-        botSay(intro + ":");
-        botShowResults(results);
-    }, 700);
-}
-
-function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const text = input.value.trim();
-    if (!text) return;
-    userSay(text);
-    input.value = '';
-    handleUserQuery(text);
-}
-
-function sendQuick(text) {
-    userSay(text);
-    handleUserQuery(text);
-}
-
-/* ================= REVEAL ANIMATION ================= */
-function observeCards() {
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('reveal');
-        });
-    }, {
-        threshold: 0.1
-    });
-    document.querySelectorAll('.prop-card').forEach(c => obs.observe(c));
-}
-
-/* ================= INIT ================= */
-document.getElementById('appt-date').min = new Date().toISOString().split('T')[0];
-populateCityDropdowns();
-renderFeatured();
-renderAppointments();
-initMap();
-
-function sendToWhatsApp() {
-    // 1. Get the values from the form
-    const name = document.getElementById('visitorName').value;
-    const phone = document.getElementById('visitorPhone').value;
-    const property = document.getElementById('propertyInterest').value;
-    const date = document.getElementById('visitDate').value;
-    const time = document.getElementById('visitTime').value;
-
-    // Optional: Check if important fields are empty before sending
-    if (!name || !phone) {
-        alert("Please enter your name and phone number.");
-        return;
-    }
-
-    // 2. The WhatsApp number you want to receive the messages on
-    // Use the country code without '+' (e.g., 91 for India). 
-    // I am using the number from your footer here.
-    const targetNumber = "919291686881";
-
-    // 3. Construct the message using URL encoding
-    // %0A represents a line break (Enter key)
-    const message = `Hello! I would like to book a property visit.%0A%0A` +
-        `*Name:* ${name}%0A` +
-        `*Phone:* ${phone}%0A` +
-        `*Property:* ${property}%0A` +
-        `*Date:* ${date}%0A` +
-        `*Time:* ${time}`;
-
-    // 4. Create the final WhatsApp API URL
-    const whatsappUrl = `https://wa.me/${targetNumber}?text=${message}`;
-
-    // 5. Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank');
-}
+renderProperties();

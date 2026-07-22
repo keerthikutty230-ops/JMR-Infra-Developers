@@ -1,338 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMR Constructions — Find the Property Without Stress</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <header>
-        <div class="nav">
-            <div class="brand" onclick="goHome()" style="cursor:pointer;">
-                <div class="brand-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 11L12 3L21 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M5 10V20H19V10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <div class="brand-name">JMR INFRA <span>DEVELOPERS</span></div>
-            </div>
-            <nav class="nav-links">
-                <a onclick="scrollToMap()">🗺️ Maps</a>
-                <a onclick="showCategory('All')">All Properties</a>
-                <a onclick="goHomeScroll('appointment')">Appointment</a>
-            </nav>
-            <div class="nav-auth">
-                <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">Contact Us</a>
-            </div>
-            <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobile-menu">
-            <a onclick="scrollToMap()">🗺️ Maps</a>
-            <a onclick="showCategory('All')">All Properties</a>
-            <a onclick="goHomeScroll('appointment')">Appointment</a>
-            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">Contact Us</a>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JMR Infra Developers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="#home" class="brand">
+        <i class="fa-sharp fa-solid fa-house-building"></i>
+        <span class="brand-text">JMR INFRA DEVELOPERS</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#map">Maps</a>
+        <a href="#allPropertiesPage" id="navAllPropertiesLink">All Properties</a>
+        <a href="#appointment">Appointment</a>
+      </nav>
+      <a class="contact-btn" href="https://wa.me/919949483794" target="_blank" rel="noopener noreferrer">Contact Us</a>
     </header>
 
-    <div id="home-view">
-        <section class="hero">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="https://www.pexels.com/download/video/31296779/" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+    <main id="home">
+      <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="https://www.pexels.com/download/video/34805554/" type="video/mp4" />
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Premium listings across Vijayawada</p>
+          <h1>All Properties</h1>
+          <p>Every listing across Vijayawada, curated with modern design, premium locations, and smart investment value.</p>
 
-            <div class="hero-overlay"></div>
-
-            <div class="hero-content">
-                <div class="eyebrow">✦ Premium Real Estate Across Vijayawada</div>
-                <h1>Find the Property Without Stress</h1>
-                <p>JMR Infra Developers is the address where your dream home becomes reality...</p>
-                <button class="hero-cta" onclick="showCategory('All')">Explore Properties →</button>
-            </div>
-        </section>
-
-        <div class="wrap">
-            <div class="search-card">
-                <div class="search-field">
-                    <label>Location</label>
-                    <select id="q-city">
-                        <option value="">Any city</option>
-                    </select>
-                </div>
-                <div class="search-field">
-                    <label>Budget</label>
-                    <select id="q-budget">
-                        <option value="">Any budget</option>
-                        <option value="0-2000000">Under ₹20 L</option>
-                        <option value="2000000-5000000">₹20 L – ₹50 L</option>
-                        <option value="5000000-10000000">₹50 L – ₹1 Cr</option>
-                        <option value="10000000-999999999">Above ₹1 Cr</option>
-                    </select>
-                </div>
-                <div class="search-field">
-                    <label>Property Type</label>
-                    <select id="q-type">
-                        <option value="">Any type</option>
-                        <option value="Land">Land</option>
-                        <option value="Plot">Plot</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Apartment">Apartment</option>
-                    </select>
-                </div>
-                <button class="search-btn" onclick="applyHomeSearch()">🔍 Search</button>
-            </div>
+          <form class="search-panel" id="searchForm">
+            <label>
+              <span>Location</span>
+              <select id="locationSelect">
+                <option value="">Any City</option>
+                <option value="Vijayawada">Vijayawada</option>
+              </select>
+            </label>
+            <label>
+              <span>Budget</span>
+              <select id="budgetSelect">
+                <option value="">Any Budget</option>
+                <option value="0-3000000">Under 20 Lakhs</option>
+                <option value="300000-500000">30 Lakhs-50 Lakhs</option>
+                <option value="5000000-8000000">50 Lakhs-80 Lakhs</option>
+                <option value="8000000-10000000">1 Crore</option>
+                <option value="10000000-500000000">1 Crore+</option>
+              </select>
+            </label>
+            <label>
+              <span>Property Type</span>
+              <select id="typeSelect">
+                <option value="">Any Type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Plot">New Projects</option>
+                <option value="Land">Land</option>
+                <option value="Buy">Buy</option>
+              </select>
+            </label>
+            <button type="submit">Search</button>
+          </form>
         </div>
+      </section>
 
-        <section class="section">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">Browse by category</span>
-                        <h2>What are you looking for?</h2>
-                    </div>
-                </div>
-                <div class="quick-tiles">
-                    <div class="quick-tile" onclick="showCategory('Buy')">
-                        <div class="icon">🏘️</div><b>Buy</b><span>Villas &amp; Plots</span>
-                    </div>
-                    <div class="quick-tile" onclick="showCategory('Apartment')">
-                        <div class="icon">🏢</div><b>Apartment</b><span>Shops &amp; offices</span>
-                    </div>
-                    <div class="quick-tile" onclick="showCategory('New Projects')">
-                        <div class="icon">✨</div><b>New Projects</b><span>Recently launched</span>
-                    </div>
-                    <div class="quick-tile" onclick="showCategory('Plot')">
-                        <div class="icon">📐</div><b>Plot</b><span>Residential plots</span>
-                    </div>
-                    <div class="quick-tile" onclick="showCategory('Land')">
-                        <div class="icon">🌾</div><b>Land</b><span>Open &amp; agri land</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" style="padding-top:10px;">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">Handpicked for you</span>
-                        <h2>Featured properties</h2>
-                        <p>A preview of our AP-wide inventory — view all to see every city.</p>
-                    </div>
-                    <button class="btn-outline" onclick="showCategory('All')">View All Properties</button>
-                </div>
-                <div class="prop-grid" id="featured-grid"></div>
-            </div>
-        </section>
-
-
-        <section class="section" id="appointment">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">See it in person</span>
-                        <h2>Book a property visit</h2>
-                        <p>Pick a property and a time — we'll confirm your visit right here.</p>
-                    </div>
-                </div>
-                <div class="appt-panel">
-                    <div class="appt-form">
-                        <form onsubmit="sendToWhatsApp(event)">
-
-                            <div class="booking-form">
-                                <label>Full name</label>
-                                <input type="text" id="visitorName" placeholder="e.g. Priya Reddy">
-
-                                <label>Phone number</label>
-                                <input type="tel" id="visitorPhone" placeholder="+91 90000 00000">
-
-                                <label>Property</label>
-                                <select id="propertyInterest">
-                                    <option>Villa in Vijayawada — ₹76 L</option>
-                                    <option>Apartment in Vijayawada — ₹40 L</option>
-                                </select>
-
-                                <label>Visit date</label>
-                                <input type="date" id="visitDate">
-
-                                <label>Preferred time</label>
-                                <input type="time" id="visitTime">
-
-                                <button onclick="sendToWhatsApp()">Confirm Booking</button>
-                            </div>
-                        </form>
-
-                        <div class="appt-confirm" id="appt-confirm">✅ <span>Visit request received — our team will call to confirm shortly.</span></div>
-                    </div>
-                    <div>
-                        <h4 style="margin-bottom:14px; color:var(--primary-dark); font-size:16px;">Your requested visits</h4>
-                        <div class="appt-list" id="appt-list">
-                            <div class="appt-empty">No visits booked yet this session.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="services-section" id="services">
-            <h2 class="section-subtitle">20+ years Legacy of Excellence</h2>
-            <p class="section-title">Find your property without any stress</p>
-
-            <div class="services-stack-container">
-
-                <div class="service-stacked-card communication-bg">
-                    <div class="card-inner-layout">
-                        <div class="stacked-card-content">
-                            <h3>Premium Infrastructure & Amenities</h3>
-                            <p>
-                                We believe that buying real estate should be an exciting milestone, not a stressful burden. From the moment you explore our properties to the final verification of clear titles, our team stands by your side with complete transparency</p>
-                            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">To know more</a>
-                        </div>
-                        <div class="stacked-card-image">
-                            <img src="https://i.postimg.cc/hts3G4Bg/MADHAV-RAO.png" alt="communication">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-stacked-card involvement-bg">
-                    <div class="card-inner-layout">
-                        <div class="stacked-card-content">
-                            <h3>Crafting Lifelong Legacies Since Day One</h3>
-                            <p>Over the past two decades, our journey has been defined by more than just transactions—it is built on a foundation of generational trust. Having successfully developed over 70+ prime locations across Vijayawada, structural engineering, and regulatory clearances.
-
-                            </p>
-                            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">To know more</a>
-                        </div>
-                        <div class="stacked-card-image">
-                            <img src="https://i.postimg.cc/mrqjctp0/MADHAV-PRADEEP.png" alt="involvement">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-stacked-card academic-bg">
-                    <div class="card-inner-layout">
-                        <div class="stacked-card-content">
-                            <h3>Your Vision, Guided by Our Expertise ></h3>
-                            <p>With over 20+ years of real estate excellence, our founder has successfully delivered 70+ premium sites across Andhra Pradesh. We don't just sell plots and villas—we build the foundations for your lifelong dreams with unmatched market expertise.
-
-                            </p>
-                            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">To know more</a>
-                        </div>
-                        <div class="stacked-card-image">
-                            <img src="https://images.pexels.com/photos/35397760/pexels-photo-35397760.jpeg" alt="academic">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-stacked-card holistic-bg">
-                    <div class="card-inner-layout">
-                        <div class="stacked-card-content">
-                            <h3>Complete Living Comfort with Zero Stress</h3>
-                            <p>Guided by a leadership team bringing over 20+ years of frontline real estate industry expertise.
-
-                                Successfully developed, managed, and delivered a proven track record of 70+ premium sites.
-                                Dedicated to providing complete legal transparency, absolute clear titles, and zero-stress paperwork.</p>
-                            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">To know more</a>
-                        </div>
-                        <div class="stacked-card-image">
-                            <img src="https://images.pexels.com/photos/34789470/pexels-photo-34789470.jpeg" alt="Holistic">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-stacked-card cultural-bg">
-                    <div class="card-inner-layout">
-                        <div class="stacked-card-content">
-                            <h3>Comprehensive Client Support</h3>
-                            <p>Offers a true client-centric approach that completely prioritizes your personal financial goals.
-
-                                Simplifies the entire buying journey by extending dedicated home loan assistance from day one.
-
-                                Eliminates the traditional burdens of property hunting, turning your dream investment into reality.</p>
-                            <a href="https://wa.me/919949483794" class="btn-card card-redirect" target="_blank" rel="noopener noreferrer">To know more</a>
-                        </div>
-                        <div class="stacked-card-image">
-                            <img src="https://images.pexels.com/photos/34789489/pexels-photo-34789489.jpeg" alt="cultural">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-        <section class="section" id="map-section" style="background:#fff;">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">Explore locations</span>
-                        <h2>Properties on the map</h2>
-                        <p>Pan and zoom to see listings across Andhra Pradesh &amp; Hyderabad. Built on OpenStreetMap (no API key needed) — swap in Google Maps JS API if you have a billing key.</p>
-                    </div>
-                </div>
-                <div id="map"></div>
-            </div>
-        </section>
-    </div>
-
-    <div id="listing-view" class="hidden">
-        <div class="view-heading">
-            <h1 id="listing-heading">All Properties</h1>
-            <p id="listing-sub">Every listing across Andhra Pradesh &amp; Hyderabad</p>
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Browse by category</p>
+          <h2>Find what fits your lifestyle</h2>
         </div>
-        <div class="wrap">
-            <div class="search-card" style="margin-top:0;">
-                <div class="search-field">
-                    <label>Location</label>
-                    <select id="l-city">
-                        <option value="">Any city</option>
-                    </select>
-                </div>
-                <div class="search-field">
-                    <label>Budget</label>
-                    <select id="l-budget">
-                        <option value="">Any budget</option>
-                        <option value="0-2000000">Under ₹20 L</option>
-                        <option value="2000000-5000000">₹20 L – ₹50 L</option>
-                        <option value="5000000-10000000">₹50 L – ₹1 Cr</option>
-                        <option value="10000000-999999999">Above ₹1 Cr</option>
-                    </select>
-                </div>
-                <div class="search-field">
-                    <label>Property Type</label>
-                    <select id="l-type">
-                        <option value="">Any type</option>
-                        <option value="Land">Land</option>
-                        <option value="Plot">Plot</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Commercial">Commercial</option>
-                    </select>
-                </div>
-                <button class="search-btn" onclick="applyListingSearch()">🔍 Search</button>
-            </div>
-            <div class="category-pills" id="listing-pills"></div>
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card active" data-category="All">All</button>
+          <button class="category-card" data-category="Buy">Buy</button>
+          <button class="category-card" data-category="Apartment"> Apartment</button>
+          <button class="category-card" data-category="New Projects"> New Projects</button>
+          <button class="category-card" data-category="Land"> Land</button>
         </div>
-        <section class="section">
-            <div class="wrap">
-                <div class="prop-grid" id="listing-grid"></div>
-                <div class="load-more-wrap"><button class="btn-outline" id="listing-load-more" onclick="loadMoreListing()">Show More</button></div>
-            </div>
-        </section>
-    </div>
+      </section>
 
-    <footer>
+      <section class="section" id="properties">
+        <div class="section-heading section-heading-row">
+          <div>
+            <p class="eyebrow">Handpicked for you</p>
+            <h2>Featured properties</h2>
+            <p class="subtext">Beautiful spaces with premium amenities and clear value.</p>
+          </div>
+          <button class="ghost-btn" id="viewAllBtn">View Properties</button>
+        </div>
+        <div class="property-grid" id="propertyGrid"></div>
+      </section>
+
+      <section class="section appointment-section" id="appointment">
+        <div class="section-heading">
+          <p class="eyebrow">Book a property visit</p>
+          <h2>Plan your tour with confidence</h2>
+          <p class="subtext">Pick a property and a time  well confirm your visit right here.</p>
+        </div>
+        <div class="appointment-grid">
+          <form class="appointment-form" id="appointmentForm">
+            <label>
+              <span>Full Name</span>
+              <input type="text" id="fullName" placeholder="Enter your name" required />
+            </label>
+            <label>
+              <span>Phone Number</span>
+              <input type="tel" id="phoneNumber" placeholder="Enter phone number" required />
+            </label>
+            <label>
+              <span>Property Visit</span>
+              <select id="propertyVisit" required>
+                <option value="">Select property</option>
+                <option value="Luxury Villa in Vijayawada">Luxury Villa in Vijayawada</option>
+                <option value="Premium Apartment">Premium Apartment</option>
+                <option value="Open Land Plot">Open Land Plot</option>
+                <option value="New Project Site Visit">New Project Site Visit</option>
+              </select>
+            </label>
+            <label>
+              <span>Visit Date</span>
+              <input type="date" id="visitDate" required />
+            </label>
+            <label>
+              <span>Preferred Time</span>
+              <input type="time" id="visitTime" required />
+            </label>
+            <button type="button" id="appointmentSubmitBtn">Confirm Booking</button>
+          </form>
+          <div class="appointment-info">
+            <h3>Why buyers choose us</h3>
+            <ul>
+              <li>Trusted guidance for first-time and seasoned buyers</li>
+              <li>Transparent pricing and premium site visits</li>
+              <li>Fast WhatsApp support for property updates</li>
+            </ul>
+            <a class="contact-btn" href="https://wa.me/919949483794" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div class="section-heading">
+          <p class="eyebrow">About us</p>
+          <h2>Building lasting value in every location</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>JMR Infra Developers is a premium real-estate brand focused on delivering high-value residential and commercial opportunities in Vijayawada and beyond.</p>
+            <p>We bring together smart planning, legal clarity, elegant design, and a customer-first experience to make every property journey effortless and rewarding.</p>
+          </div>
+          <div class="about-images">
+            <img src="https://images.pexels.com/photos/10360944/pexels-photo-10360944.jpeg" alt="Modern real estate property" />
+            <img src="https://i.postimg.cc/hts3G4Bg/MADHAV-RAO.png" alt="Luxury home exterior" />
+            <img src="https://i.postimg.cc/mrqjctp0/MADHAV-PRADEEP.png" alt="Contemporary building facade" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section map-section" id="map">
+        <div class="section-heading">
+          <p class="eyebrow">Map view</p>
+          <h2>Explore property locations in Vijayawada</h2>
+        </div>
+        <iframe src="https://www.google.com/maps?q=Vijayawada&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </section>
+    </main>
+
+    <section class="section all-properties-page hidden" id="allPropertiesPage">
+      <div class="section-heading section-heading-row">
+        <div>
+          <p class="eyebrow">All Properties</p>
+          <h2>Browse every listing</h2>
+          <p class="subtext">View all available properties in one dedicated page with full detail cards.</p>
+        </div>
+        <button class="ghost-btn" id="backHomeBtn">Back to Home</button>
+      </div>
+      <div class="property-grid" id="allPropertyGrid"></div>
+    </section>
+
+     <footer>
         <div class="wrap footer-grid">
             <div>
-                <div class="brand-name" style="color:#fff;">Varshini <span style="color:var(--gold);">Construction</span></div>
-                <p style="max-width:280px; font-size:13px; margin-top:10px;">Premium villas, plots, land and commercial spaces across Andhra Pradesh and Hyderabad. Demo data for showcase purposes.</p>
+                <div class="brand-name" style="color:#fff;">Varshini <span style="color:#d1c132;">Construction</span></div>
+                <p style="max-width:280px; font-size:13px; margin-top:10px;">Premium Apartments, plots, lands across Vijayawada, Andhra Pradesh.</p>
             </div>
             <div>
                 <div>
@@ -354,70 +208,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrap footer-bottom">
+                <!-- <div class="wrap footer-bottom">
                     <span>© 2026 Varshini Construction. Sample project — not a real listing service.</span>
                     <span>Built for demo purposes</span>
-                </div>
+                </div> -->
     </footer>
 
-    <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeModal()">
-        <div class="modal-box" id="modal-box"></div>
+    <button class="chat-toggle" id="chatToggle" aria-label="Open chatbot"><i class="fa-solid fa-robot"></i></button>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header">
+        <div class="chat-title-wrap">
+          <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <h3>JMR Assistant</h3>
+            <p>AI Property Guide</p>
+          </div>
+        </div>
+        <button id="chatClose" aria-label="Close chatbot"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-bubble bot">Hello! I can help with property options, appointments, apartments, land, and new projects.</div>
+      </div>
+      <form class="chat-form" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Type your question..." required />
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
     </div>
 
-    <div class="modal-overlay" id="auth-overlay" onclick="if(event.target===this) closeAuth()">
-        <div class="modal-box" style="max-width:400px;">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeAuth()">✕</button>
-                <h3 id="auth-title">Login</h3>
-                <div class="auth-tabs">
-                    <button class="auth-tab active" id="tab-login" onclick="switchAuth('login')">Login</button>
-                    <button class="auth-tab" id="tab-register" onclick="switchAuth('register')">Register</button>
-                </div>
-                <div class="form-field" id="auth-name-field" style="display:none;">
-                    <label>Full name</label>
-                    <input type="text" placeholder="Your name">
-                </div>
-                <div class="form-field">
-                    <label>Email or phone</label>
-                    <input type="text" placeholder="you@example.com">
-                </div>
-                <div class="form-field">
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••">
-                </div>
-                <button class="hero-cta" style="width:100%; justify-content:center; box-shadow:none; color:#3a2e05;" onclick="submitAuth()">Continue</button>
-                <div class="auth-note">Demo UI only — connect a real authentication backend to enable accounts.</div>
-            </div>
-        </div>
-    </div>
-
-    <button class="chat-bubble" onclick="toggleChat()" aria-label="Open chat">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-            <path d="M4 4H20V16H8L4 20V4Z" stroke="white" stroke-width="1.8" stroke-linejoin="round" />
-        </svg>
-    </button>
-    <div class="chat-panel" id="chat-panel">
-        <div class="chat-head">
-            <div class="chat-dot"></div>
-            <div>
-                <b>Varshini Assistant</b>
-                <span>Ask about any city in AP or Hyderabad</span>
-            </div>
-        </div>
-        <div class="chat-body" id="chat-body"></div>
-        <div class="quick-chips">
-            <button class="quick-chip" onclick="sendQuick('Plots in Hyderabad')">Hyderabad</button>
-            <button class="quick-chip" onclick="sendQuick('Land under 20 lakhs')">Under ₹20L</button>
-            <button class="quick-chip" onclick="sendQuick('Commercial in Vijayawada')">Commercial - Vijayawada</button>
-        </div>
-        <div class="chat-input-row">
-            <input type="text" id="chat-input" placeholder="e.g. villas in Tirupati under 80 lakhs" onkeydown="if(event.key==='Enter') sendMessage()">
-            <button class="chat-send" onclick="sendMessage()">➤</button>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="sheet.js"></script>
-</body>
-
+  </body>
 </html>
