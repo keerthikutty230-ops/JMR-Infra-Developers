@@ -178,10 +178,13 @@ button { cursor: pointer; }
 .search-panel button {
   border: none;
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 8px 12px;
+  height: 6vh;
+  min-height: 6vh;
   background: linear-gradient(135deg, var(--accent), #ffcf69);
   color: var(--primary-dark);
   font-weight: 700;
+  margin-top:24px;
 }
 .section {
   padding: 72px 24px;
